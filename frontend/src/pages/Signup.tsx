@@ -12,7 +12,6 @@ const SignUp: React.FC = () => {
 
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
-    // Add sign up logic here
     navigate('/homepage');
   };
 
