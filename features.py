@@ -28,7 +28,9 @@ def signUp(firstname, lastname, email, username, password):
     else:
         print("Sign up successful!")
         # Call to query to add to db with email, password, username
-        #newUser = User(first_name =firstname, last_name = lastname, username=username, email=email, password=password, qr_link = generateQR(), number_of_strikes=0, number_of_orders=0, referral_count =0, referral_code = generateReferral(), points=0)
+        newUser = User(first_name =firstname, last_name = lastname, username=username, email=email, password=password, qr_link = generateQR(1), number_of_strikes=0, number_of_orders=0, referral_count =0, referral_code = generateReferral(), points=0)
+        db.session.add(newUser)
+        db.session.commit()
         # call addUser(function here)!!!
 
 # if an account with username exists in database
@@ -75,3 +77,8 @@ def generateReferral():
     while (len(result)!=6):
         result = "0" + result
     return result 
+
+'''
+with app.app_context():
+    signUp("Dip","Biswas","saw@gmail.com","samnssssss","hihihi")
+'''
