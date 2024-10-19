@@ -1,7 +1,16 @@
+import React from 'react';
 import Card from "../components/card";
+import NavBar from "../components/NavBar";
 
-const Homepage = () => {
-  const data = [
+interface CardData {
+  title: string;
+  description: string;
+  image: string;
+  link: string;
+}
+
+const Homepage: React.FC = () => {
+  const data: CardData[] = [
     {
       title: 'OTHER OF PEARL',
       description: 'by Jenny Kendler Friday-Sunday through November 3',
@@ -23,15 +32,25 @@ const Homepage = () => {
   ];
 
   return (
-    <>
-      <div className='flex flex-col m-auto mt-10 gap-y-5'>
-        {
-          data.map((item, index) => (
-            <Card key={index} title={item.title} description={item.description} image={item.image} link={item.link} />
-          ))
-        }
+    <div className="flex flex-col items-center w-full max-w-md mx-auto bg-white">
+      <img 
+        src="/Ecocycle.png" 
+        alt="Ecocycle Logo" 
+        className="w-48 mt-4 mb-6"
+      />
+      <div className='flex flex-col w-full gap-y-4 px-4'>
+        {data.map((item, index) => (
+          <Card 
+            key={index} 
+            title={item.title} 
+            description={item.description} 
+            image={item.image} 
+            link={item.link} 
+          />
+        ))}
       </div>
-    </>
+      <NavBar/>
+    </div>
   );
 };
 

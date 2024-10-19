@@ -20,11 +20,11 @@ function NavBar() {
   };
 
   return (
-    <div className="fixed bottom-0 z-50 w-full bg-white border-t border-gray-200 dark:bg-gray-700 dark:border-gray-600">
+    <div className="fixed bottom-0 z-50 w-full bg-white border-t border-gray-200">
       <div className="relative max-w-lg mx-auto">
         
         {/* Main Nav-Bar Items */}
-        <div className="flex items-center">
+        <div className="flex items-center justify-between">
           <TooltipButton
             tooltipId="tooltip-home"
             tooltipText="Home"
@@ -66,7 +66,7 @@ function NavBar() {
             className="absolute bottom-[100%] right-[60px] mb-2 bg-white shadow-lg rounded-lg p-2"
             style={{ minWidth: "120px" }}
           >
-            <ul className="ftext-gray-800">
+            <ul className="text-gray-800">
               <li className="flex items-center justify-center w-full p-2">
                 <TooltipButton
                   tooltipId="tooltip-rewards"
