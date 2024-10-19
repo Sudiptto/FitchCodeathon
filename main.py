@@ -25,7 +25,9 @@ def create_default_plates():
                 is_used=False,
                 user_id=None,  # No user assigned initially
                 meal=None,     # No meal assigned initially
-                time_out=0.0   # Default timeout set to 0
+                time_out=0.0,   # Default timeout set to 0,
+                first_name=None,
+                last_name=None
             )
             db.session.add(plate)
         
@@ -34,10 +36,22 @@ def create_default_plates():
     else:
         print("Default plates already exist. Skipping creation.")
 
+# function to add a vendor
+def addVendor(first_name, last_name, email, password, store_name):
+    vendor = Vendor(
+        first_name=first_name,
+        last_name=last_name,
+        email=email,
+        password=password,
+        store_name=store_name
+    )
+    db.session.add(vendor)
+    db.session.commit()
 
 with app.app_context():
     signUp("Sudiptto", "Biswas", "biswassudiptto@gmail.com", "Sbiswas", "123112", "964996")
     signUp("Mahin", "Evan", "mahinEvan@gmail.com", "MahIN", "bds21", "964996")
+    #addVendor("Fauzias", "Chicken", "fauziasStore@gmail.com", "123112", "Fauzias")
     #checkReferall("964996")
     create_default_plates()  # Create default plates only if none exist"""
 
@@ -52,13 +66,21 @@ def signUpEco(firstName, lastName, userName, email, password, referallCode):
 
     return jsonify({'message': responseUser})
 
-# Route to log in
+# Route to log in user side
 @app.route('/EcoCycle/logIn/<email>/<password>', methods=['GET'])
 def logInEco(email, password):
     responseUser = ""
     responseUser = checkLogin(email, password)
 
     return jsonify({'message': responseUser})
+
+# route to login vendor side
+@app.route('/EcoCycle/logInVendor/<username>/<password>', methods=['GET'])
+def logInVendorEco(username, password):
+    responseVendor = ""
+    responseVendor = checkVendorLogin(username, password)
+
+    return jsonify({'message': responseVendor})
 
 # Route to get user info by email (not for QR code)
 @app.route('/EcoCycle/getUserInfo/<email>', methods=['GET'])
@@ -74,9 +96,26 @@ def getUserInfoEco(email):
 def getQRCodeEco(email):
     responseUser = ""
     userData = getUserInfo(email)
-    responseUser = getQRCode(email) + f"http://10.170.35.244:5500/EcoCycle/getUserInfo/{userData['email']}"
+    responseUser = getQRCode(email) + f"http://10.170.35.244:5500/EcoCycle/assignPlate/{userData['email']}"
 
     return jsonify({'message': responseUser})
+
+# Route to assign a plate to User from qr code
+@app.route('/EcoCycle/assignPlate/<email>', methods=['GET'])
+def assignPlateEco(email):
+    responseUser = ""
+    #responseUser = assignPlate(email)
+
+    responseUser = assignPlate(email)
+
+    return responseUser
+
+# route to de-assign a plate from a user 
+@app.route('/EcoCycle/deAssignPlate/<email>', methods=['GET'])
+def deAssignPlateEco(email):
+    responseUser = deAssignPlate(email)
+
+    return responseUser
 
 if __name__ == '__main__':
     app.run(host="10.170.35.244", port=5500, debug=True)

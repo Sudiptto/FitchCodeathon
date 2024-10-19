@@ -35,7 +35,7 @@ class Vendor(db.Model):
     id = db.Column(db.Integer, primary_key=True)
     first_name = db.Column(db.String(50), nullable=False)
     last_name = db.Column(db.String(50), nullable=False)
-    username = db.Column(db.String(50), unique=True, nullable=False)
+    email = db.Column(db.String(150), unique=True, nullable=False)
     password = db.Column(db.String(128), nullable=False)
     store_name = db.Column(db.String(100), nullable=False)
 
@@ -55,9 +55,13 @@ class Plate(db.Model):
     meal = db.Column(db.String(100), nullable=True)  # Allow null for meal
     time_out = db.Column(db.Float, nullable=True)
 
+    # New fields for first and last names
+    first_name = db.Column(db.String(50), nullable=True, default=None)  # Allow null for first name
+    last_name = db.Column(db.String(50), nullable=True, default=None)   # Allow null for last name
+
     def __repr__(self):
-        return f'<Plate {self.plate_id} for User {self.user_id}>'
-    
+        return f'<Plate {self.plate_id} for User {self.user_id} ({self.first_name} {self.last_name})>'
+
 # Create a BannedUser model
 class BannedUser(db.Model):
     __tablename__ = 'banned_users'

@@ -1,4 +1,5 @@
 from models import *
+from flask import jsonify
 
 #Check if a login attempt is succesful
 #@param: String representing given email from field
@@ -98,6 +99,16 @@ def generateReferral():
     return result 
 
 
+# check if user is a vendor
+def checkVendorLogin(email, password):
+    vendor = Vendor.query.filter_by(email=email).first()
+    if not vendor:
+        return "No vendor"
+    elif vendor.password != password:
+        return "Wrong Password"
+    else:
+        return "Login successful"
+
 # get user info based of email return first name / last name / username / email / number of strikes / number of orders / referall count / referall code / points / qrCode as a dictionary
 def getUserInfo(email):
     user = User.query.filter_by(email=email).first()
@@ -119,7 +130,68 @@ def getQRCode(email):
     user = User.query.filter_by(email=email).first()
     return user.qr_link
 
-#signUp("Dip","Biswas","saw@gmail.com","samnssssss","hihihi")
-   
+# Assign a plate for a user
+def assignPlate(email):
+    # Fetch the user based on the provided email
+    user = User.query.filter_by(email=email).first()
+
+    # Find the most recent unused plate
+    plate = Plate.query.filter_by(is_used=False).order_by(Plate.id.desc()).first()
+    
+    # Randomly select a meal from the provided list
+    meals = ["Chicken", "Goat", "Fish"]
+    random_meal = random.choice(meals)
+
+    # Update the plate information
+    plate.is_used = True
+    plate.user_id = user.id
+    plate.first_name = user.first_name
+    plate.last_name = user.last_name
+    plate.meal = random_meal
+
+    # Commit the changes to the database
+    db.session.commit()
+
+    # Return a JSON response
+    return jsonify({
+        'plate_number': plate.plate_id,
+        'first_name': plate.first_name,
+        'last_name': plate.last_name
+    })
+
+
+# De-assign a plate for a user
+def deAssignPlate(email):
+    # Fetch the user based on the provided email
+    user = User.query.filter_by(email=email).first()
+
+    # Check if the user exists
+    if not user:
+        return jsonify({'Error': 'User not found'}), 404  # Return 404 if user does not exist
+
+    # Find the most recent used plate assigned to the user
+    plate = Plate.query.filter_by(user_id=user.id, is_used=True).order_by(Plate.id.desc()).first()
+
+    # Check if the plate exists
+    if not plate:
+        return jsonify({'Error': 'Plate not found for this user'}), 404  # Return 404 if plate does not exist
+
+    # Update the plate information
+    plate.is_used = False
+    plate.user_id = None
+    plate.first_name = None
+    plate.last_name = None
+    plate.meal = None
+
+    # Commit the changes to the database
+    db.session.commit()
+
+    # Return a JSON response
+    return jsonify({
+        'plate_number': plate.plate_id,
+        'first_name': plate.first_name,
+        'last_name': plate.last_name,
+        'Message': 'Plate de-assigned successfully'
+    })
 
     
