@@ -10,9 +10,12 @@ CORS(app)  # Enable CORS for all routes
 
 
 # sample route to return "Hello World"
-@app.route('/hello', methods=['GET'])
-def hello():
+@app.route('/login', methods=['GET'])
+def login(email, password):
     return jsonify({'message': 'Hello World'})
+
+
+
 
 
 if __name__ == '__main__':
