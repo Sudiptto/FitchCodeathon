@@ -1,5 +1,4 @@
 /* NavBar File*/
-
 import { useState } from "react";
 import icons from './icons';  // Import the icons module
 import TooltipButton from "./TooltipButton"; // Import the TooltipButton
