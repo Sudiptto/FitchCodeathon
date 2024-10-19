@@ -1,28 +1,29 @@
-from main import * 
+from models import *
 
 #Check if a login attempt is succesful
 #@param: String representing given email from field
 #@param: String representing given password from field
 def checkLogin(email,password):
     if not emailExists(email):
-        print("No account with this email exists")
+        return "No email"
     elif not correctPassword(email, password):
-        print("This is the wrong password.")
+        return "Wrong Password"
     else: 
-        print("Login successful!")
+        return "Login successful"
 
-# check if user referall exists 
-def checkReferall(referallCode):
-    # check if referal code is in database
-    referal = User.query.filter_by(referral_code=referallCode).first()
+# check if user referral exists 
+def checkReferall(referralCode):
+    # check if referral code is in the database
+    referral_user = User.query.filter_by(referral_code=referralCode).first()
 
-    # if referal code is in database
-    if referal:
-        # add 200 points to whatever user has refered based off which user has the referal code
-        referal.points += 200
+    # if referral code is in the database
+    if referral_user:
+        # add 200 points to the user who has the referral code
+        referral_user.points += 200
+        db.session.commit()  # Make sure to commit the changes to the database
 
-    return referal
-checkReferall("123456")
+    return referral_user
+
 
 #Check if a signup attempt is succesful
 #@param: String representing representing user's first name from field
@@ -31,7 +32,7 @@ checkReferall("123456")
 #@param: String representing given username from field
 #@param: String representing given password from field
 #@param: referallCode
-def signUp(firstname, lastname, email, username, password, referralCode):
+def signUp(firstname, lastname, email, username, password, referallCode):
 
     if emailExists(email):
         return "Email Exists"
@@ -40,14 +41,16 @@ def signUp(firstname, lastname, email, username, password, referralCode):
         return "Account exists"
     
     # check if referal code is in database
-
+    elif checkReferall(referallCode) == False:
+        return "Referral code does exists"
+    
     else:
         print("Sign up successful!")
         # Call to query to add to db with email, password, username
-        newUser = User(first_name =firstname, last_name = lastname, username=username, email=email, password=password, qr_link = generateQR(1), number_of_strikes=0, number_of_orders=0, referral_count =0, referral_code = generateReferral(), points=0)
+        newUser = User(first_name =firstname, last_name = lastname, username=username, email=email, password=password, qr_link = generateQR(), number_of_strikes=0, number_of_orders=0, referral_count =0, referral_code = generateReferral(), points=0)
         db.session.add(newUser)
         db.session.commit()
-        # call addUser(function here)!!!
+        return "Sign up successful"
 
 # if an account with username exists in database
 # @param: A string that represents username, to check if it exists 
@@ -81,8 +84,8 @@ def correctPassword(email,password):
 
 #generate a unique QR link, marked by the unique id of user 
 #@param: unique id of user 
-def generateQR(id):
-    return "https://127.0.0.1/QrCode/" + str(id)
+def generateQR():
+    return "https://api.qrserver.com/v1/create-qr-code/?size=250x250&data=" 
 
 #generate a unique referral code (6 digit stored as a string) that doesn't already exist in database
 def generateReferral():
@@ -95,8 +98,28 @@ def generateReferral():
     return result 
 
 
-with app.app_context():
-    signUp("Dip","Biswas","saw@gmail.com","samnssssss","hihihi")
+# get user info based of email return first name / last name / username / email / number of strikes / number of orders / referall count / referall code / points / qrCode as a dictionary
+def getUserInfo(email):
+    user = User.query.filter_by(email=email).first()
+    return {
+        "first_name": user.first_name,
+        "last_name": user.last_name,
+        "username": user.username,
+        "email": user.email,
+        "number_of_strikes": user.number_of_strikes,
+        "number_of_orders": user.number_of_orders,
+        "referral_count": user.referral_count,
+        "referral_code": user.referral_code,
+        "points": user.points,
+        "qrCode": user.qr_link
+    }
+
+# get QR code
+def getQRCode(email):
+    user = User.query.filter_by(email=email).first()
+    return user.qr_link
+
+#signUp("Dip","Biswas","saw@gmail.com","samnssssss","hihihi")
    
 
     
