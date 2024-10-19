@@ -1,5 +1,6 @@
 /* Helper file to import SVG icons as variables and export them as a typed object.
    This allows easy access to SVG icon paths across the application with proper TypeScript typing. */
+   
 import homeIcon from "./svg_icons/home.svg";
 import scanIcon from "./svg_icons/scan.svg";
 import statusIcon from "./svg_icons/status.svg";
