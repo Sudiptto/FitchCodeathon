@@ -1,19 +1,14 @@
 import React, { useState } from 'react';
-import { Route, Routes, useNavigate, Link } from 'react-router-dom';
-import Homepage from './pages/Homepage';
-import VendorLogin from './pages/VendorLogin';
+import { useNavigate, Link } from 'react-router-dom';
 
-// This is the User Login Page
-const LoginPage: React.FC = () => {
-  // state variables
-  const [email, setEmail] = useState('');
+const VendorLogin = () => {
+  const [vendorEmail, setVendorEmail] = useState('');
   const [password, setPassword] = useState('');
   const navigate = useNavigate();
 
-  // submission
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
-    navigate('/homepage');
+    navigate('/vendor-homepage');
   };
 
   return (
@@ -23,16 +18,16 @@ const LoginPage: React.FC = () => {
         <div className="mb-8 text-center">
           <img src="/Ecocycle.png" alt="Ecocycle logo" className="w-48 h-48 mx-auto mb-2" />
         </div>
-        <h2 className="mb-8 text-4xl font-normal text-center">Welcome back!</h2>
+        <h2 className="mb-8 text-4xl font-normal text-center">Welcome Back!</h2>
         {/* Form */}
         <form className="space-y-4" onSubmit={handleSubmit}>
-          {/* Email */}
+          {/* Vendor Email */}
           <input
             type="email"
-            placeholder="Email"
+            placeholder="Vendor Email"
             className="w-full px-4 py-3 text-lg font-normal border-2 border-black rounded-md"
-            value={email}
-            onChange={(e) => setEmail(e.target.value)}
+            value={vendorEmail}
+            onChange={(e) => setVendorEmail(e.target.value)}
           />
           <div className="relative">
             {/* Password */}
@@ -65,17 +60,15 @@ const LoginPage: React.FC = () => {
           <hr className="w-full border-gray-300" />
           <span className="absolute px-4 text-sm font-normal text-gray-500 bg-white">or</span>
         </div>
-        <div className="flex justify-center space-x-4 mb-8">
-          <img src="/facebook.png" alt="Facebook login" className="w-12 h-12 rounded-md" />
-          <img src="/google.png" alt="Google login" className="w-12 h-12 rounded-md" />
-          <img src="/apple.png" alt="Apple login" className="w-12 h-12 rounded-md" />
-        </div>
         <div className="text-center space-y-2">
           <p className="text-sm font-normal text-gray-600">
-            Don't have an account? <a href="#" className="font-normal text-green-600">Sign Up</a>
+            Want to join EcoCycle? <a href="#" className="font-normal text-green-600">Contact Us</a>
           </p>
           <p className="text-sm font-normal text-gray-600">
-            Are you a vendor? <Link to="/vendorlogin" className="font-normal text-green-600">Log In</Link>
+            Why join us? <a href="#" className="font-normal text-green-600">Join Us</a>
+          </p>
+          <p className="text-sm font-normal text-gray-600">
+            Are you a user? <Link to="/" className="font-normal text-green-600">Log In</Link>
           </p>
         </div>
       </div>
@@ -83,14 +76,4 @@ const LoginPage: React.FC = () => {
   );
 };
 
-const App: React.FC = () => {
-  return (
-    <Routes>
-      <Route path="/" element={<LoginPage />} />
-      <Route path="/homepage" element={<Homepage />} />
-      <Route path="/vendorlogin" element={<VendorLogin />} />
-    </Routes>
-  );
-};
-
-export default App;
+export default VendorLogin;
