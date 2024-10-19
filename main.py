@@ -30,7 +30,7 @@ class User(db.Model):
     number_of_strikes = db.Column(db.Integer, default=0, nullable=False)
     number_of_orders = db.Column(db.Integer, default=0, nullable=False)
     referral_count = db.Column(db.Integer, default=0, nullable=False)
-    referral_code = db.Column(db.String(6), default=lambda: str(random.randint(100000, 999999)), unique=True, nullable=False)
+    referral_code = db.Column(db.String(6), default=lambda: str(random.randint(100000, 999999)), unique=True, nullable=True)
     points = db.Column(db.Integer, default=0, nullable=False)
 
     plates = db.relationship('Plate', backref='user', lazy=True)
@@ -108,10 +108,10 @@ class InactivePlate(db.Model):
         return f'<InactivePlate {self.plate_id} by User {self.user_id}>'
 
 
-""""
--> One time functions
+
+#-> One time functions
 # Function to create default plates
-def create_default_plates():
+"""def create_default_plates():
     # Check if plates already exist to avoid duplicates
     if Plate.query.count() == 0:
         for i in range(1, 26):
@@ -129,11 +129,14 @@ def create_default_plates():
         print("Default plates created.")
     else:
         print("Default plates already exist. Skipping creation.")
-"""
+
+
+with app.app_context():
+    create_default_plates()  # Create default plates only if none exist"""
 
 # Sample route to return "Hello World"
-@app.route('/hello', methods=['GET'])
-def hello():
+@app.route('/signUp/<firstName>/<lastName>/<userName>/<email>/<password>/<referallCode>', methods=['GET'])
+def signUp():
     return jsonify({'message': 'Hello World'})
 
 
@@ -141,6 +144,7 @@ def hello():
 if __name__ == '__main__':
     # Create databases
     with app.app_context():
+
         db.create_all()  # Create all tables if they don't exist
         #create_default_plates()  # Create default plates only if none exist
     
