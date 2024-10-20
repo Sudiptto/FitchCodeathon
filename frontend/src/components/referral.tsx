@@ -9,7 +9,7 @@ const Referral = () => {
     useEffect(() => {
         const fetchReferralCode = async () => {
         //get api call
-        const response = await fetch('/api/getUser')
+        const response = await fetch(`${import.meta.env.VITE_API_URL}/EcoCycle/getUserInfo/mahinEvan@gmail.com`)
         const data = await response.json()
         setUser(data)
         };
