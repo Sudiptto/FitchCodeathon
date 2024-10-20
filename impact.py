@@ -4,6 +4,7 @@ This section is for the amount of impact the user has had if they used our app, 
 from models import *
 from flask import jsonify
 from sqlalchemy.sql import func  
+from passwords import *
 
 """
 Environmental Impact of Using Reusable Plates and Cutlery
@@ -116,6 +117,18 @@ def getUserImpact(email):
     # The number of plates saved equals the number of meals with reusable plates
     landfill_waste_saved = numberOfPlates  # in terms of number of plates avoided
    '''
+    
+    userSaveData = {
+        "co2_savings_kg": co2_savings,
+        "energy_savings_mj": energy_savings,
+         "landfill_waste_saved_plates": landfill_waste_saved,
+         "waste_saved_lbs": waste_saved
+    }
+
+      # run function 
+    #imgUrl = generate_and_upload_impact_graph(userSaveData, imgBBAPIKey)
+    #print(imgUrl)
+
     # Return the user's environmental impact
     return jsonify({
         'email': email,

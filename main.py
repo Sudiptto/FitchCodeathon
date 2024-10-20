@@ -38,17 +38,17 @@ with app.app_context():
     "michael.brown@gmail.com",
     "sophia.garcia@yahoo.com"
     ]
-    # modify referall code count
-    #modifyReferallCodeCount("biswassudiptto@gmail.com")
-    #modifyReferallCodeCount("emily.jones@outlook.com")
-    #modifyReferallCodeCount("sophia.garcia@yahoo.com")
-    #modifyReferallCodeCount("mahinEvan@gmail.com")
-    #modifyReferallCodeCount("daniel.smith01@gmail.com")
+    """# modify referall code count
+    modifyReferallCodeCount("biswassudiptto@gmail.com")
+    modifyReferallCodeCount("emily.jones@outlook.com")
+    modifyReferallCodeCount("sophia.garcia@yahoo.com")
+    modifyReferallCodeCount("mahinEvan@gmail.com")
+    modifyReferallCodeCount("daniel.smith01@gmail.com")
 
     # modify orders (mocking)
-    """for email in emails:
-        modifyNumberOfOrders(email)                          
-    """
+    for email in emails:
+        modifyNumberOfOrders(email)     """                     
+    
     #modifyNumberOfOrders("mahinEvan@gmail.com")  
     create_default_plates()  # Create default plates only if none exist"""
 
