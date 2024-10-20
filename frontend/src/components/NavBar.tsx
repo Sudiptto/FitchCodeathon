@@ -2,6 +2,7 @@ import { useState } from "react";
 import { useNavigate } from "react-router-dom"; // Import useNavigate for programmatic navigation
 import icons from './icons';  // Import the icons module
 import TooltipButton from "./TooltipButton"; // Import the TooltipButton
+import Referral from "./referral"; // Import the Referral
 
 function NavBar() {
   const [activeButton, setActiveButton] = useState("");
@@ -21,11 +22,11 @@ function NavBar() {
   };
 
   return (
-    <div className="fixed bottom-0 z-50 w-full bg-white border-t border-gray-200">
+    <div className="fixed bottom-0 z-50 w-full bg-white border-t border-gray-200 dark:bg-gray-700 dark:border-gray-600">
       <div className="relative max-w-lg mx-auto">
         
         {/* Main Nav-Bar Items */}
-        <div className="flex items-center justify-between">
+        <div className="flex items-center">
           <TooltipButton
             tooltipId="tooltip-home"
             tooltipText="Home"
@@ -67,7 +68,7 @@ function NavBar() {
             className="absolute bottom-[100%] right-[60px] mb-2 bg-white shadow-lg rounded-lg p-2"
             style={{ minWidth: "120px" }}
           >
-            <ul className="text-gray-800">
+            <ul className="ftext-gray-800">
               <li className="flex items-center justify-center w-full p-2">
                 <TooltipButton
                   tooltipId="tooltip-rewards"
@@ -91,6 +92,7 @@ function NavBar() {
                 />
               </li>
               <li className="flex items-center justify-center w-full p-2">
+                 {/*
                 <TooltipButton
                   tooltipId="tooltip-refferal"
                   tooltipText="Referral"
@@ -99,6 +101,9 @@ function NavBar() {
                   onClick={() => handleButtonClick("referral", "/Refferal")}
                   svgSrc={icons.refferalIcon}
                 />
+                */}
+              
+                <Referral/>
               </li>
             </ul>
           </div>
