@@ -197,6 +197,72 @@ def logInVendorEco(username, password):
     return jsonify({'message': responseVendor})
 
 
+# route to get the leaderboard of the top users based off points
+@app.route('/EcoCycle/getLeaderboard', methods=['GET'])
+def getLeaderboard():
+    responseVendor = ""
+    responseVendor = fetchLeaderboard()
+
+    return responseVendor
+
+"""
+    {
+        {
+            order: "Order 25',
+            time: "2024-10-20 00:40:01.773988"
+            price: 12
+        },
+        {
+            order: "Order 25',
+            time: "2024-10-20 00:40:01.773988"
+            price: 12
+        }
+        ....
+    }
+
+"""
+"""
+sample response:
+[
+  {
+    "firstName": "Sudiptto",
+    "lastName": "Biswas",
+    "meal": "Fauzia's Jerk Chicken Gyro",
+    "order": "Order 22",
+    "price": 10.0,
+    "time": "2024-10-19 20:40:01.773988"
+  },
+  {
+    "firstName": "Sudiptto",
+    "lastName": "Biswas",
+    "meal": "Pot of Rice and Beans Cooking",
+    "order": "Order 23",
+    "price": 8.0,
+    "time": "2024-10-19 20:40:01.773988"
+  },
+  {
+    "firstName": "Sudiptto",
+    "lastName": "Biswas",
+    "meal": "Curry Chicken",
+    "order": "Order 24",
+    "price": 15.0,
+    "time": "2024-10-19 20:40:01.773988"
+  },
+  {
+    "firstName": "Sudiptto",
+    "lastName": "Biswas",
+    "meal": "Pot of Rice and Beans Cooking",
+    "order": "Order 25",
+    "price": 8.0,
+    "time": "2024-10-19 20:40:01.773988"
+  }
+]
+
+or
+
+[]
+
+"""
 # route to get all the current orders from the plate class on vendor side
 @app.route('/EcoCycle/getCurrentOrders', methods=['GET'])
 def getCurrentOrders():
