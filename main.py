@@ -335,8 +335,21 @@ def getUserImpactEco(email):
 
     return userImpactData
 
+'''
+sample route:
+{
+  "co2_savings_kg": 1319.387,
+  "energy_savings_mj": 13633.66,
+  "first_name": "Fauzias",
+  "landfill_waste_saved_plates": 8657,
+  "last_name": "Chicken",
+  "store_name": "Fauzias",
+  "waste_saved_lbs": 484.792
+}
+'''
 @app.route('/EcoCycle/getVendorImpact', methods=['GET'])
 def getVendorImpactEco():
+    print("")
     vendorImpactData = getVendorImpact()
 
     return vendorImpactData
@@ -344,5 +357,5 @@ def getVendorImpactEco():
 
 
 if __name__ == '__main__':
-    #app.run(host="10.170.35.244", port=5500, debug=True)
-    app.run(debug=True)
+    app.run(host="10.170.35.244", port=5500, debug=True)
+    #app.run(debug=True)

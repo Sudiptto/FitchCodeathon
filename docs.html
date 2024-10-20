@@ -108,7 +108,7 @@
 }</code></pre>
 
     <h2>Redeem Reward</h2>
-    <p><strong>Endpoint:</strong> <code>/EcoCycle/redeemReward/&lt;email&gt;/&lt;pointsInReward&gt;</code></p>
+    <p><strong>Endpoint:</strong> <code>/EcoCycle/redeemReward/&lt;pointsInReward&gt;/&lt;email&gt;</code></p>
     <p><strong>Method:</strong> GET</p>
     <p><strong>Sample Response:</strong></p>
     <pre><code>{
@@ -190,7 +190,7 @@
 </code></pre>
 
 <h2>Get User Impact</h2>
-<p><strong>Endpoint:</strong> <code>/EcoCycle/getUserImpact/<email></code></p>
+<p><strong>Endpoint:</strong> <code>/EcoCycle/getUserImpact/email</code></p>
 <p><strong>Method:</strong> GET</p>
 <p><strong>Sample Response:</strong></p>
 <pre><code>
@@ -203,6 +203,20 @@
       }
 
 </code></pre>
+
+<h2>Get Vendor Impact</h2>
+    <p><strong>Endpoint:</strong> <code>/EcoCycle/getVendorImpact</code></p>
+    <p><strong>Method:</strong> GET</p>
+    <p><strong>Sample Response:</strong></p>
+    <pre><code>{
+  "co2_savings_kg": 1319.387,
+  "energy_savings_mj": 13633.66,
+  "first_name": "Fauzias",
+  "landfill_waste_saved_plates": 8657,
+  "last_name": "Chicken",
+  "store_name": "Fauzias",
+  "waste_saved_lbs": 484.792
+}</code></pre>
 
 
 </body>

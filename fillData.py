@@ -5,7 +5,7 @@ import random
 
 
 def fillSignUpData():
-    signUp("Sudiptto", "Biswas", "biswassudiptto@gmail.com", "Sbiswas", "123112", "964996")
+    """"signUp("Sudiptto", "Biswas", "biswassudiptto@gmail.com", "Sbiswas", "123112", "964996")
     signUp("Mahin", "Evan", "mahinEvan@gmail.com", "MahIN", "bds21", "964996")
     signUp("Sam", "Evan", "sam@gmail.com", "samCrew", "bds21", "087206")
     signUp("Aaaron", "Miang", "aaronM@gmail.com", "AaronCrew", "123112", "087206")
@@ -13,7 +13,8 @@ def fillSignUpData():
     signUp("Daniel", "Smith", "daniel.smith01@gmail.com", "DannyS", "safePass1", "549872")
     signUp("Emily", "Jones", "emily.jones@outlook.com", "EmilyJ", "secure123", "735890")
     signUp("Michael", "Brown", "michael.brown@gmail.com", "MikeB", "brownie12", "198764")
-    signUp("Sophia", "Garcia", "sophia.garcia@yahoo.com", "SophieG", "gPass2024", "623451")
+    signUp("Sophia", "Garcia", "sophia.garcia@yahoo.com", "SophieG", "gPass2024", "623451")"""
+    pass
 
     
 # function to add a vendor
