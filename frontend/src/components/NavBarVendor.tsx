@@ -22,7 +22,7 @@ function NavBarVendor() {
             tooltipText="Home"
             srText="Home"
             isActive={activeButton === "home"}
-            onClick={() => handleButtonClick("home", "/Homepage")}
+            onClick={() => handleButtonClick("home", "/VendorHomepage")}
             svgSrc={icons.homeIcon}
           />
           <TooltipButton
@@ -39,7 +39,7 @@ function NavBarVendor() {
             tooltipText="Inventory"
             srText="Inventory"
             isActive={activeButton === "inventory"}
-            onClick={() => handleButtonClick("inventory", "/Inventory")}
+            onClick={() => handleButtonClick("inventory", "/VendorInventory")}
             svgSrc={icons.appsIcon}
           />
           <TooltipButton
@@ -47,7 +47,7 @@ function NavBarVendor() {
             tooltipText="Profile"
             srText="Profile"
             isActive={activeButton === "profile"}
-            onClick={() => handleButtonClick("profile", "/Profile")}
+            onClick={() => handleButtonClick("profile", "/VendorProfile")}
             svgSrc={icons.profileIcon}
           />
         </div>

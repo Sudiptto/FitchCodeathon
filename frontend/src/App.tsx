@@ -10,6 +10,8 @@ import Status from './pages/Status';
 import Rewards from './pages/Rewards';
 import VendorStatus from './pages/VendorStatus';
 import UserProfile from './pages/Profile';
+import VendorInventory from './pages/VendorInventory';
+import VendorProfile from './pages/VendorProfile';
 
 // This is the User Login Page
 const LoginPage: React.FC = () => {
@@ -103,6 +105,8 @@ const App: React.FC = () => {
       <Route path="/signup" element={<SignUp />} />
       <Route path="test" element={<Test/>} />
       <Route path="/vendorhomepage" element={<VendorHomepage />} />
+      <Route path="/vendorinventory" element={<VendorInventory />} />
+      <Route path="/VendorProfile" element={<VendorProfile />} />
       <Route path="/vendorstatus" element={<VendorStatus />} />
       <Route path="/profile" element={<UserProfile />} />
     </Routes>

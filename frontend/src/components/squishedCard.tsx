@@ -4,7 +4,7 @@ const SquishedCard = ({
   time 
 }: { 
   title: string, 
-  subtitle: string, 
+  subtitle?: string, 
   time: string 
 }) => {
   return (
