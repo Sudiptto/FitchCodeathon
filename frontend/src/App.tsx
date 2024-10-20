@@ -3,6 +3,7 @@ import { Route, Routes, useNavigate, Link } from 'react-router-dom';
 import Homepage from './pages/Homepage';
 import VendorLogin from './pages/VendorLogin';
 import SignUp from './pages/Signup';
+import Test from './pages/test';
 
 // This is the User Login Page
 const LoginPage: React.FC = () => {
@@ -91,6 +92,7 @@ const App: React.FC = () => {
       <Route path="/homepage" element={<Homepage />} />
       <Route path="/vendorlogin" element={<VendorLogin />} />
       <Route path="/signup" element={<SignUp />} />
+      <Route path="test" element={<Test/>} />
     </Routes>
   );
 };
