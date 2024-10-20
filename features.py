@@ -21,8 +21,9 @@ def checkReferall(referralCode):
 
     # if referral code is in the database
     if referral_user:
-        # add 200 points to the user who has the referral code
+        # add 200 points to the user who has the referral code + update referral count
         referral_user.points += 200
+        referral_user.referral_count += 1
         db.session.commit()  # Make sure to commit the changes to the database
 
     return referral_user
@@ -162,6 +163,10 @@ def assignPlate(email):
     plate.meal = random_meal
     plate.meal_price = meal_price
 
+
+    # update the user's number of orders
+    user.number_of_orders += 1
+    
     # Commit the changes to the database
     db.session.commit()
 
@@ -372,3 +377,35 @@ def fetchLeaderboard():
     return leaderboard        
 
     
+
+# redeem rewards section
+
+def redeemRewards(pointsInReward, email):
+    pointsInReward = int(pointsInReward)
+    user = User.query.filter_by(email=email).first()
+    if not user:
+        return jsonify({'Error': 'User not found'}), 404  # Return 404 if user does not exist
+
+    # Check if the user has enough points to redeem the reward
+    if user.points < pointsInReward:
+        return jsonify({'Error': 'Insufficient points to redeem the reward'}), 400  # Return 400 if user has insufficient points
+
+    # number of points before
+    pointBeforePurchase = user.points
+
+    # Deduct the points from the user
+    user.points -= pointsInReward
+
+    # Commit the changes to the database
+    db.session.commit()
+
+    # Return a JSON response
+    return jsonify({
+        'firstName': user.first_name,
+        'lastName': user.last_name,
+        'email': user.email,
+        'point_previous': pointBeforePurchase,
+        'points_current': user.points,
+        'points_subtracted': pointsInReward,
+        'Message': 'Reward redeemed successfully'
+    })    

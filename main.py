@@ -6,10 +6,11 @@ from flask import Flask, request, jsonify
 from flask_sqlalchemy import SQLAlchemy
 from flask_cors import CORS
 from passwords import *  # Make sure this imports your 'secret'
-import random
 from models import *
 from features import *
 from app import *
+from fillData import * 
+
 
 CORS(app)  # Enable CORS for all routes
 
@@ -37,17 +38,7 @@ def create_default_plates():
     else:
         print("Default plates already exist. Skipping creation.")
 
-# function to add a vendor
-def addVendor(first_name, last_name, email, password, store_name):
-    vendor = Vendor(
-        first_name=first_name,
-        last_name=last_name,
-        email=email,
-        password=password,
-        store_name=store_name
-    )
-    db.session.add(vendor)
-    db.session.commit()
+
 
 with app.app_context():
     #signUp("Sudiptto", "Biswas", "biswassudiptto@gmail.com", "Sbiswas", "123112", "964996")
@@ -56,6 +47,30 @@ with app.app_context():
     #signUp("Aaaron", "Miang", "aaronM@gmail.com", "AaronCrew", "123112", "087206")
     #addVendor("Fauzias", "Chicken", "fauziasStore@gmail.com", "123112", "Fauzias")
     #checkReferall("964996")
+    #fillSignUpData()
+
+    emails = [
+    "biswassudiptto@gmail.com",
+    "mahinEvan@gmail.com",
+    "sam@gmail.com",
+    "aaronM@gmail.com",
+    "jess.williams@gmail.com",
+    "daniel.smith01@gmail.com",
+    "emily.jones@outlook.com",
+    "michael.brown@gmail.com",
+    "sophia.garcia@yahoo.com"
+    ]
+    # modify referall code count
+    #modifyReferallCodeCount("biswassudiptto@gmail.com")
+    #modifyReferallCodeCount("emily.jones@outlook.com")
+    #modifyReferallCodeCount("sophia.garcia@yahoo.com")
+    #modifyReferallCodeCount("mahinEvan@gmail.com")
+    #modifyReferallCodeCount("daniel.smith01@gmail.com")
+
+    # modify orders (mocking)
+    """for email in emails:
+        modifyNumberOfOrders(email)                          
+    """
     create_default_plates()  # Create default plates only if none exist"""
 
 # Route to sign up
@@ -128,7 +143,7 @@ response:
 def getQRCodeEco(email):
     responseUser = ""
     userData = getUserInfo(email)
-    responseUser = getQRCode(email) + f"http://10.170.35.244:5500/EcoCycle/assignPlate/{userData['email']}"
+    responseUser = getQRCode(email) + f"http://127.0.0.1:5000/EcoCycle/assignPlate/{userData['email']}"
 
     return jsonify({'message': responseUser})
 
@@ -179,8 +194,25 @@ def deAssignPlateEco(email):
 
     return responseUser
 
+# route to redeem a reward for a user 
+"""
+sample response (note the pointsInReward is an integer)
+{
+  "Message": "Reward redeemed successfully",
+  "email": "mahinEvan@gmail.com",
+  "firstName": "Mahin",
+  "lastName": "Evan",
+  "point_previous": 5100,
+  "points_current": 4900,
+  "points_subtracted": 200
+}
+"""
+@app.route('/EcoCycle/redeemReward/<pointsInReward>/<email>', methods=['GET'])
+def redeemRewardEco(pointsInReward, email):
+    responseUser = ""
+    responseUser = redeemRewards(pointsInReward, email)
 
-# NOTE: EVERYTHING DOWN HERE IS FOR THE VENDOR SIDE 
+    return responseUser
 
 # route to login vendor side
 # username = email
@@ -334,5 +366,5 @@ def getCurrentOrders():
 
 
 if __name__ == '__main__':
-    app.run(host="10.170.35.244", port=5500, debug=True)
-    #app.run(debug=True)
+    #app.run(host="10.170.35.244", port=5500, debug=True)
+    app.run(debug=True)
