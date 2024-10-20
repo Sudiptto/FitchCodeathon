@@ -86,10 +86,10 @@ const Homepage: React.FC = () => {
         src="/Ecocycle.png"
         alt="Ecocycle Logo"
         style={{ width: "168px", height: "137px" }}
-        className="mt-4 mb-6"
+        className="mt-4 mb-2"
       />
 
-      <h2 className="mt-8 mb-2 text-center text-xl text-green-600">Your EcoCycle Impact</h2>
+      <h2 className="mt-0 mb-2 text-center text-xl text-green-600">Your EcoCycle Impact</h2>
 
       {isLoading ? (
         <p>Loading user impact...</p>
