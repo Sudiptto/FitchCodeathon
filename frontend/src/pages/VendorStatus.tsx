@@ -72,7 +72,7 @@ const VendorStatus: React.FC = () => {
     <div className="flex flex-col min-h-screen bg-white">
       <div className="flex-grow p-4">
         <div className="flex justify-center items-center w-full mb-6">
-          <img src="/Ecocycle.png" alt="Ecocycle Logo" className="w-48" />
+          <img src="/Ecocycle.png" alt="Ecocycle Logo" className="w-48" style={{ width: "168px", height: "137px" }}/>
         </div>
         <div className="space-y-3">
           {orders.map((order) => (
