@@ -3,6 +3,7 @@ import { Route, Routes, useNavigate, Link } from 'react-router-dom';
 import Homepage from './pages/Homepage';
 import VendorLogin from './pages/VendorLogin';
 import SignUp from './pages/Signup';
+import Test from './pages/test';
 import VendorHomepage from './pages/VendorHomepage';
 import VendorStatus from './pages/VendorStatus';
 
@@ -93,6 +94,7 @@ const App: React.FC = () => {
       <Route path="/homepage" element={<Homepage />} />
       <Route path="/vendorlogin" element={<VendorLogin />} />
       <Route path="/signup" element={<SignUp />} />
+      <Route path="test" element={<Test/>} />
       <Route path="/vendorhomepage" element={<VendorHomepage />} />
       <Route path="/vendorstatus" element={<VendorStatus />} />
     </Routes>
