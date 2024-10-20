@@ -1,17 +1,22 @@
 const Card = ({ title, description, image, link }: { title: string, description: string, image: string, link: string }) => {
-    return (
-      <div
-        className="w-3/4 m-auto rounded-md font-comfortaa cursor-pointer"
-        onClick={() => {
-          window.open(link, "_blank"); 
-        }}
-      >
-        <img className="" src={image} alt={title} />
-        <h2 className="text-[#365f7b] text-2xl mt-2">{title}</h2>
-        <p className="text-gray-400">{description}</p>
-      </div>
-    );
-  };
+ return (
+    // Container div for the card
+    <div
+      className="w-3/4 m-auto rounded-md font-comfortaa cursor-pointer"
+      onClick={() => {
+        // Open the link in a new tab when the card is clicked
+        window.open(link, "_blank");
+      }}
+    >
+      {/* Card image */}
+      <img className="" src={image} alt={title} />
+      {/* Card title */}
+      <h2 className="text-[#365f7b] text-2xl mt-2">{title}</h2>
+      {/* Card description */}
+      <p className="text-gray-400">{description}</p>
+    </div>
+ );
+};
   
   export default Card;
   
