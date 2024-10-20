@@ -16,9 +16,9 @@ const VendorLogin = () => {
     <div className="flex flex-col items-center justify-start bg-white px-8 py-12 font-comfortaa" style={{ width: '430px', height: '932px' }}>
       <div className="w-full max-w-md">
         {/* Logo */}
-        <div className="mb-8 text-center">
-          <img src="/Ecocycle.png" alt="Ecocycle logo" className="w-48 h-48 mx-auto mb-2" />
-        </div>
+            <div className="flex justify-center items-center w-full mb-6">
+            <img src="/Ecocycle.png" alt="Ecocycle logo" className="w-48 h-48" />
+            </div>
         <h2 className="mb-8 text-4xl font-normal text-center">Welcome Back!</h2>
         {/* Form */}
         <form className="space-y-4" onSubmit={handleSubmit}>

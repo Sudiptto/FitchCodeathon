@@ -10,11 +10,11 @@ const VendorHomepage: React.FC = () => {
   ];
 
   return (
-    <div className="flex flex-col items-center w-full max-w-md mx-auto bg-white">
+    <div className="flex flex-col items-center w-full max-w-md text-center bg-white">
       <img
         src="/Ecocycle.png"
         alt="Ecocycle Logo"
-        className="w-48 mt-4 mb-6"
+        className="ww-48 mt-4 mb-6 mx-auto"
       />
       <div className="flex flex-col items-center w-full px-4 mb-4">
         {stats.map((stat, index) => (
