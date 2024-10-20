@@ -1,3 +1,4 @@
+/* Reward Card format with image */
 const RewardCard = ({
   title,
   subtitle,
