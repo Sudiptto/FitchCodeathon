@@ -3,20 +3,25 @@ import { useNavigate } from "react-router-dom";
 import icons from "./icons";
 import TooltipButton from "./TooltipButton";
 
+// NavBarVendor component for vendor navigation
 function NavBarVendor() {
+  // State to keep track of the active button
   const [activeButton, setActiveButton] = useState("");
   const navigate = useNavigate();
 
+  // Function to handle button clicks
   const handleButtonClick = (buttonName: string, linkHref: string) => {
     setActiveButton(buttonName);
     navigate(linkHref);
   };
 
   return (
+    // Main container for the navigation bar
     <div className="fixed bottom-0 z-50 w-full bg-white border-t border-gray-200 dark:bg-gray-700 dark:border-gray-600">
       <div className="relative max-w-lg mx-auto">
         {/* Main Nav-Bar Items */}
         <div className="flex items-center">
+          {/* Home button */}
           <div className="flex-1 flex justify-center">
             <TooltipButton
               tooltipId="tooltip-home"
@@ -27,6 +32,7 @@ function NavBarVendor() {
               svgSrc={icons.homeIcon}
             />
           </div>
+          {/* Status button */}
           <div className="flex-1 flex justify-center">
             <TooltipButton
               tooltipId="tooltip-status"
@@ -37,6 +43,7 @@ function NavBarVendor() {
               svgSrc={icons.statusIcon}
             />
           </div>
+          {/* Inventory button */}
           <div className="flex-1 flex justify-center">
             <TooltipButton
               tooltipId="tooltip-inventory"
@@ -47,6 +54,7 @@ function NavBarVendor() {
               svgSrc={icons.appsIcon}
             />
           </div>
+          {/* Profile button */}
           <div className="flex-1 flex justify-center">
             <TooltipButton
               tooltipId="tooltip-profile"
