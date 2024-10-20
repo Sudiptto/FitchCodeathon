@@ -89,7 +89,9 @@ const Homepage: React.FC = () => {
         className="mt-4 mb-2"
       />
 
-      <h2 className="mt-0 mb-2 text-center text-xl text-green-600">Your EcoCycle Impact</h2>
+      <h2 className="mt-0 mb-2 text-center text-xl text-green-600">
+        Your EcoCycle Impact
+      </h2>
 
       {isLoading ? (
         <p>Loading user impact...</p>
@@ -112,6 +114,13 @@ const Homepage: React.FC = () => {
       ) : (
         <p>No data available</p>
       )}
+
+<div className="w-full px-4 mb-4">
+        <img src="/userpie.png" alt="user pie chart" className="w-full" />
+      </div>
+      <div className="w-full px-4 mb-4">
+        <img src="/usergraph.png" alt="user graph" className="w-full" />
+      </div>
 
       <div className="flex flex-col w-full gap-y-4 px-4">
         {data.map((item, index) => (
