@@ -8,7 +8,8 @@ const VendorLogin = () => {
 
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
-    navigate('/vendor-homepage');
+    // Navigate to the vendor homepage after form submission
+    navigate('/vendorhomepage');
   };
 
   return (
