@@ -124,8 +124,7 @@ def getUserInfo(email):
         "number_of_orders": user.number_of_orders,
         "referral_count": user.referral_count,
         "referral_code": user.referral_code,
-        "points": user.points,
-        "qrCode": user.qr_link
+        "points": user.points
     }
 
 # get QR code
@@ -376,7 +375,7 @@ def fetchLeaderboard():
 
     return leaderboard        
 
-    
+
 
 # redeem rewards section
 

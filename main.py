@@ -269,25 +269,7 @@ sample response:
   }
 ]
 """
-def fetchLeaderboard():
-    # Query all users and order them by points in descending order
-    users = User.query.order_by(User.points.desc()).all()
-
-    # Create a list to store the formatted leaderboard
-    leaderboard = []
-
-    # Iterate over each user and format the response
-    for i, user in enumerate(users, start=1):
-        user_data = {
-            "rank": i,
-            "firstName": user.first_name,
-            "lastName": user.last_name,
-            "username": user.username,
-            "points": user.points
-        }
-        leaderboard.append(user_data)
-
-    return leaderboard        
+    
 
 # route to get the leaderboard of the top users based off points
 @app.route('/EcoCycle/getLeaderboard', methods=['GET'])
