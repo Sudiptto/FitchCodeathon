@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import icons from "./icons";
 import TooltipButton from "./TooltipButton";
@@ -86,7 +86,7 @@ function NavBar(): JSX.Element {
           <div
             className="absolute bottom-[100%] right-[60px] mb-0 bg-none shadow-none rounded-lg p-0"
           >
-            <ul className="bg-gray-100 rounded-full p-6 space-y-4">
+            <ul className="p-6 space-y-4 bg-gray-100 rounded-full">
               <li className="flex flex-col items-center justify-center w-full">
                 <TooltipButton
                   tooltipId="tooltip-rewards"
@@ -123,7 +123,7 @@ function NavBar(): JSX.Element {
           <button
             type="button"
             onClick={fetchQRCode}
-            className="flex items-center justify-center w-16 h-16 bg-green-700 text-white rounded-full shadow-lg"
+            className="flex items-center justify-center w-16 h-16 text-white bg-green-700 rounded-full shadow-lg"
           >
             <img src={icons.scanIcon} alt="Scan" className="w-8 h-8" />
           </button>
@@ -131,12 +131,12 @@ function NavBar(): JSX.Element {
 
         {/* QR Code Modal */}
         {showQRCode && (
-          <div className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50">
+          <div className="fixed inset-0 z-50 flex items-center justify-center bg-black bg-opacity-50">
             <div className="bg-white p-3 rounded-lg max-w-[250px] w-full">
-              <p className="text-center font-bold mb-2 text-sm leading-tight">
+              <p className="mb-2 text-sm font-bold leading-tight text-center">
                 SCAN THIS QR CODE AT THE CASHIER TO GET YOUR PLATE!
               </p>
-              <div className="border-2 border-black p-1 mb-2">
+              <div className="p-1 mb-2 border-2 border-black">
                 <img
                   src={qrCodeUrl}
                   alt="QR Code"
@@ -145,7 +145,7 @@ function NavBar(): JSX.Element {
               </div>
               <button
                 onClick={() => setShowQRCode(false)}
-                className="px-3 py-1 bg-red-500 text-white text-sm rounded hover:bg-red-600 w-full"
+                className="w-full px-3 py-1 text-sm text-white bg-red-500 rounded hover:bg-red-600"
               >
                 Close
               </button>
