@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import NavBar from "../components/NavBar";
+import NavBarVendor from '@/components/NavBarVendor';
 
 interface Order {
   number: number;
@@ -85,7 +85,7 @@ const VendorStatus: React.FC = () => {
         </div>
       </div>
       {selectedOrder && <OrderPopup order={selectedOrder} onClose={() => setSelectedOrder(null)} />}
-      <NavBar />
+      <NavBarVendor />
     </div>
   );
 };
