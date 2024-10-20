@@ -1,5 +1,5 @@
-/* NavBar File*/
 import { useState } from "react";
+import { useNavigate } from "react-router-dom"; // Import useNavigate for programmatic navigation
 import icons from './icons';  // Import the icons module
 import TooltipButton from "./TooltipButton"; // Import the TooltipButton
 import Referral from "./referral"; // Import the Referral
@@ -7,11 +7,12 @@ import Referral from "./referral"; // Import the Referral
 function NavBar() {
   const [activeButton, setActiveButton] = useState("");
   const [isCategoriesOpen, setIsCategoriesOpen] = useState(false);
+  const navigate = useNavigate(); // Initialize the useNavigate hook
 
   /* Sets button to be green and redirects user */
   const handleButtonClick = (buttonName: string, linkHref: string) => {
     setActiveButton(buttonName);
-    window.location.href = linkHref;
+    navigate(linkHref); // Use navigate to perform client-side navigation
   };
 
   /* Drop down icons for categories icon */
@@ -31,7 +32,7 @@ function NavBar() {
             tooltipText="Home"
             srText="Home"
             isActive={activeButton === "home"}
-            onClick={() => handleButtonClick("home", "#home")}
+            onClick={() => handleButtonClick("home", "/Homepage")}
             svgSrc={icons.homeIcon}
           />
           <TooltipButton
@@ -39,7 +40,7 @@ function NavBar() {
             tooltipText="Status"
             srText="Status"
             isActive={activeButton === "status"}
-            onClick={() => handleButtonClick("status", "#status")}
+            onClick={() => handleButtonClick("status", "/Status")}
             svgSrc={icons.statusIcon}
           />
           <div className="w-16"></div>
@@ -56,7 +57,7 @@ function NavBar() {
             tooltipText="Profile"
             srText="Profile"
             isActive={activeButton === "profile"}
-            onClick={() => handleButtonClick("profile", "#profile")}
+            onClick={() => handleButtonClick("profile", "/Profile")}
             svgSrc={icons.profileIcon}
           />
         </div>
@@ -74,7 +75,7 @@ function NavBar() {
                   tooltipText="Rewards"
                   srText="Rewards"
                   isActive={activeButton === "rewards"}
-                  onClick={() => handleButtonClick("rewards", "#rewards")}
+                  onClick={() => handleButtonClick("rewards", "/Rewards")}
                   svgSrc={icons.rewardsIcon}
                 />
               </li>
@@ -85,7 +86,7 @@ function NavBar() {
                   srText="Leaderboard"
                   isActive={activeButton === "leaderboard"}
                   onClick={() =>
-                    handleButtonClick("leaderboard", "#leaderboard")
+                    handleButtonClick("leaderboard", "/Leaderboard")
                   }
                   svgSrc={icons.leaderboardIcon}
                 />
@@ -94,10 +95,10 @@ function NavBar() {
                  {/*
                 <TooltipButton
                   tooltipId="tooltip-refferal"
-                  tooltipText="Refferal"
-                  srText="Refferal"
-                  isActive={activeButton === "refferal"}
-                  onClick={() => handleButtonClick("refferal", "#refferal")}
+                  tooltipText="Referral"
+                  srText="Referral"
+                  isActive={activeButton === "referral"}
+                  onClick={() => handleButtonClick("referral", "/Refferal")}
                   svgSrc={icons.refferalIcon}
                 />
                 */}
@@ -112,7 +113,7 @@ function NavBar() {
         <div className="absolute inset-x-0 flex justify-center -top-6">
           <button
             type="button"
-            onClick={() => handleButtonClick("scan", "#scan")}
+            onClick={() => handleButtonClick("scan", "/scan")}
             className="flex items-center justify-center w-16 h-16 bg-green-700 text-white rounded-full shadow-lg"
           >
             <img src={icons.scanIcon} alt="Scan" className="w-8 h-8" />
