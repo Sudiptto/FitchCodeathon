@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import icons from "./icons";
 import TooltipButton from "./TooltipButton";
@@ -22,7 +22,7 @@ function NavBarVendor() {
         {/* Main Nav-Bar Items */}
         <div className="flex items-center">
           {/* Home button */}
-          <div className="flex-1 flex justify-center">
+          <div className="flex justify-center flex-1">
             <TooltipButton
               tooltipId="tooltip-home"
               tooltipText="Home"
@@ -33,7 +33,7 @@ function NavBarVendor() {
             />
           </div>
           {/* Status button */}
-          <div className="flex-1 flex justify-center">
+          <div className="flex justify-center flex-1">
             <TooltipButton
               tooltipId="tooltip-status"
               tooltipText="Status"
@@ -44,7 +44,7 @@ function NavBarVendor() {
             />
           </div>
           {/* Inventory button */}
-          <div className="flex-1 flex justify-center">
+          <div className="flex justify-center flex-1">
             <TooltipButton
               tooltipId="tooltip-inventory"
               tooltipText="Inventory"
@@ -55,7 +55,7 @@ function NavBarVendor() {
             />
           </div>
           {/* Profile button */}
-          <div className="flex-1 flex justify-center">
+          <div className="flex justify-center flex-1">
             <TooltipButton
               tooltipId="tooltip-profile"
               tooltipText="Profile"
