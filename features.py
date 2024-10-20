@@ -37,16 +37,23 @@ def checkReferall(referralCode):
 #@param: String representing given password from field
 #@param: referallCode
 def signUp(firstname, lastname, email, username, password, referallCode):
-
+    
+    print("User referall code: ", referallCode)
+    print(type(referallCode))
+    # if referallCode = 'None'
     if emailExists(email):
         return "Email Exists"
     
     elif userExists(username):
         return "Account exists"
     
-    # check if referal code is in database
-    elif checkReferall(referallCode) == False:
-        return "Referral code does exists"
+    elif referallCode == 'None':
+        print("User has no referall code")
+    
+    elif referallCode != 'None':
+        # check if referal code is in database
+        if checkReferall(referallCode) == False:
+            return "Referral code does exists"
     
     else:
         print("Sign up successful!")
