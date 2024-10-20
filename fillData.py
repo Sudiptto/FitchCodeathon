@@ -45,13 +45,35 @@ def modifyReferallCodeCount(email):
 # function to modify number of orders (mock data)
 def modifyNumberOfOrders(email):
     # generate random integer from 1 - 10 (number of orders)
-    number_of_orders = random.randint(1, 10)
+    number_of_orders = random.randint(55, 105)
 
     user = User.query.filter_by(email=email).first()
     user.number_of_orders += number_of_orders
 
     # modify points
-    user.points += (number_of_orders * 500)
+    #user.points += (number_of_orders * 500)
 
     db.session.commit()
 
+# Function to create default plates
+def create_default_plates():
+    # Check if plates already exist to avoid duplicates
+    if Plate.query.count() == 0:
+        for i in range(1, 26):
+            plate = Plate(
+                plate_id=str(i),
+                qr_code=f"https://127.0.0.1/QrCode/{i}",
+                is_used=False,
+                user_id=None,  # No user assigned initially
+                meal=None,     # No meal assigned initially
+                time_out=0.0,   # Default timeout set to 0,
+                first_name=None,
+                meal_price=None,
+                last_name=None
+            )
+            db.session.add(plate)
+        
+        db.session.commit()
+        print("Default plates created.")
+    else:
+        print("Default plates already exist. Skipping creation.")

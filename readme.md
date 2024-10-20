@@ -1,5 +1,7 @@
 This is our project
 
+View API documentation here: https://ecocycledocs.tiiny.site/ 
+
 HOW TO RUN SERVER THIS AT HOME -> DOCUMENTATION FOR MAHIN, EVAN, AARON AND SAMIN (WHEN WE ARE NOT AT HUNTER)
 
 Step #1 Install the requirements.txt, simply run pip install -r requirements.txt, for the people on mac do pip3 install -r requirements.txt (Typically in mac, you do pip3 for python instead of pip)

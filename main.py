@@ -9,35 +9,13 @@ from passwords import *  # Make sure this imports your 'secret'
 from models import *
 from features import *
 from app import *
+from impact import *
 from fillData import * 
 
 
 CORS(app)  # Enable CORS for all routes
 
 #-> One time functions
-# Function to create default plates
-def create_default_plates():
-    # Check if plates already exist to avoid duplicates
-    if Plate.query.count() == 0:
-        for i in range(1, 26):
-            plate = Plate(
-                plate_id=str(i),
-                qr_code=f"https://127.0.0.1/QrCode/{i}",
-                is_used=False,
-                user_id=None,  # No user assigned initially
-                meal=None,     # No meal assigned initially
-                time_out=0.0,   # Default timeout set to 0,
-                first_name=None,
-                meal_price=None,
-                last_name=None
-            )
-            db.session.add(plate)
-        
-        db.session.commit()
-        print("Default plates created.")
-    else:
-        print("Default plates already exist. Skipping creation.")
-
 
 
 with app.app_context():
@@ -71,6 +49,7 @@ with app.app_context():
     """for email in emails:
         modifyNumberOfOrders(email)                          
     """
+    #modifyNumberOfOrders("mahinEvan@gmail.com")  
     create_default_plates()  # Create default plates only if none exist"""
 
 # Route to sign up
@@ -83,12 +62,11 @@ sample response:
 @app.route('/EcoCycle/signUp/<firstName>/<lastName>/<userName>/<email>/<password>/<referallCode>', methods=['GET'])
 def signUpEco(firstName, lastName, userName, email, password, referallCode):
     print(firstName, lastName, userName, email, password, referallCode)
-    responseUser = ""
-   
-    responseUser = signUp(firstName, lastName, userName, email, password, referallCode)
+    
+    signupResponse = signUp(firstName, lastName, userName, email, password, referallCode)
 
 
-    return jsonify({'message': responseUser})
+    return jsonify({'message': signupResponse})
 
 # Route to log in user side
 """
@@ -99,10 +77,9 @@ sample: response
 """
 @app.route('/EcoCycle/logIn/<email>/<password>', methods=['GET'])
 def logInEco(email, password):
-    responseUser = ""
-    responseUser = checkLogin(email, password)
+    loginResponse = checkLogin(email, password)
 
-    return jsonify({'message': responseUser})
+    return jsonify({'message': loginResponse})
 
 
 
@@ -164,12 +141,10 @@ bad response:
 """
 @app.route('/EcoCycle/assignPlate/<email>', methods=['GET'])
 def assignPlateEco(email):
-    responseUser = ""
-    #responseUser = assignPlate(email)
 
-    responseUser = assignPlate(email)
+    plateAssigned = assignPlate(email)
 
-    return responseUser
+    return plateAssigned
 
 # route to de-assign a plate from a user
 """
@@ -190,9 +165,9 @@ bad response:
 """ 
 @app.route('/EcoCycle/deAssignPlate/<email>', methods=['GET'])
 def deAssignPlateEco(email):
-    responseUser = deAssignPlate(email)
+    plateDeAssigned = deAssignPlate(email)
 
-    return responseUser
+    return plateDeAssigned
 
 # route to redeem a reward for a user 
 """
@@ -209,10 +184,9 @@ sample response (note the pointsInReward is an integer)
 """
 @app.route('/EcoCycle/redeemReward/<pointsInReward>/<email>', methods=['GET'])
 def redeemRewardEco(pointsInReward, email):
-    responseUser = ""
-    responseUser = redeemRewards(pointsInReward, email)
+    rewardsData = redeemRewards(pointsInReward, email)
 
-    return responseUser
+    return rewardsData
 
 # route to login vendor side
 # username = email
@@ -223,7 +197,6 @@ def redeemRewardEco(pointsInReward, email):
 """
 @app.route('/EcoCycle/logInVendor/<username>/<password>', methods=['GET'])
 def logInVendorEco(username, password):
-    responseVendor = ""
     responseVendor = checkVendorLogin(username, password)
 
     return jsonify({'message': responseVendor})
@@ -274,11 +247,10 @@ sample response:
 # route to get the leaderboard of the top users based off points
 @app.route('/EcoCycle/getLeaderboard', methods=['GET'])
 def getLeaderboard():
-    responseVendor = ""
-    responseVendor = fetchLeaderboard()
 
-    return responseVendor
+    leaderboardData = fetchLeaderboard()
 
+    return leaderboardData
 """
     {
         {
@@ -340,11 +312,28 @@ or
 # route to get all the current orders from the plate class on vendor side
 @app.route('/EcoCycle/getCurrentOrders', methods=['GET'])
 def getCurrentOrders():
-    responseVendor = ""
-    responseVendor = fetchCurrentOrders()
+    currentOrders = fetchCurrentOrders()
     
     
-    return responseVendor
+    return currentOrders
+
+"""
+sample response
+{
+  "co2_savings_kg": 15.698,
+  "email": "mahinEvan@gmail.com",
+  "energy_savings_mj": 162.21,
+  "landfill_waste_saved_plates": 103,
+  "waste_saved_lbs": 5.768
+}
+"""
+
+# route to get all the imapct of a user
+@app.route('/EcoCycle/getUserImpact/<email>', methods=['GET'])
+def getUserImpactEco(email):
+    userImpactData = getUserImpact(email)
+
+    return userImpactData
 
 
 if __name__ == '__main__':
