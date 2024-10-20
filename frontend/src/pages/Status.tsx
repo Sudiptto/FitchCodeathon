@@ -1,24 +1,26 @@
+import React from 'react';
 import SquishedCard from "../components/squishedCard";
 import NavBar from "../components/NavBar";
+import StatusBar from '@/components/StatusBar';
 
 const Status: React.FC = () => {
-    const data = [
-        {
-          title: "Current Order",
-          subtitle: "$18.00",
-          time: "Plate 5",
-        },
-        {
-          title: "Order 2",
-          subtitle: "$14.00",
-          time: "+300",
-        },
-        {
-          title: "Order 1",
-          subtitle: "$22.00",
-          time: "+200",
-        },
-      ];
+  const data = [
+    {
+      title: "Current Order",
+      subtitle: "$18.00",
+      time: "Plate 5",
+    },
+    {
+      title: "Order 2",
+      subtitle: "$14.00",
+      time: "+300",
+    },
+    {
+      title: "Order 1",
+      subtitle: "$22.00",
+      time: "+200",
+    },
+  ];
 
   return (
     <>
@@ -33,12 +35,8 @@ const Status: React.FC = () => {
           alt="Govisland Map"
           className="w-50 mt-4 mb-6"
         />
-        <img
-          src="/status.png"
-          alt="Status Time"
-          className="w-50 mt-4 mb-6"
-        />
-        <div className="flex flex-col w-full gap-y-4 px-4">
+        <StatusBar /> {/* Add the new StatusBar component here */}
+        <div className="flex flex-col w-full gap-y-4 px-4 mt-8">
           {data.map((item, index) => (
             <SquishedCard
               key={index}
@@ -49,7 +47,6 @@ const Status: React.FC = () => {
           ))}
         </div>
       </div>
-
       <div className="mt-auto">
         <NavBar />
       </div>
