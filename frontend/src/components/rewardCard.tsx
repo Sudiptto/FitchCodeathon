@@ -1,6 +1,5 @@
-import React, { useState, useEffect } from 'react';
+import { useState, useEffect } from 'react';
 import { Dialog, DialogContent, DialogTrigger } from "@/components/ui/dialog";
-import icons from './icons';
 
 /* Reward Card format with image */
 const RewardCard = ({
