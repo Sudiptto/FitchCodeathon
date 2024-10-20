@@ -7,6 +7,7 @@ import Test from './pages/test';
 import VendorHomepage from './pages/VendorHomepage';
 import Leaderboard from './pages/Leaderboard';
 import VendorStatus from './pages/VendorStatus';
+import UserProfile from './pages/Profile';
 
 // This is the User Login Page
 const LoginPage: React.FC = () => {
@@ -99,6 +100,7 @@ const App: React.FC = () => {
       <Route path="test" element={<Test/>} />
       <Route path="/vendorhomepage" element={<VendorHomepage />} />
       <Route path="/vendorstatus" element={<VendorStatus />} />
+      <Route path="/profile" element={<UserProfile />} />
     </Routes>
   );
 };
