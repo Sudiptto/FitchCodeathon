@@ -26,17 +26,17 @@ const Referral = () => {
       <DialogTrigger asChild>
         <button className="flex flex-col items-center">
           <img src={icons.refferalIcon} alt="Referral Icon" className="w-6 h-6 mb-1" />
-          <span className="text-sm">Refferal</span>
+          <span className="text-sm">Referral</span>
         </button>
       </DialogTrigger>
-      <DialogContent className="bg-white rounded-lg p-6 max-w-sm mx-auto">
+      <DialogContent className="max-w-sm p-6 mx-auto bg-white rounded-lg">
         <div className="flex flex-col items-center text-center">
           <img src={icons.refferalIcon} alt="Referral Icon" className="w-16 h-16 mb-4" />
-          <h2 className="text-green-400 font-bold text-xl mb-2">REFERRAL CODE</h2>
-          <h3 className="text-2xl font-bold mb-4">Send to Friend!</h3>
-          <p className="text-5xl font-bold mb-4">{user? (user["referral_code"]):(<p>Are you signed in?</p>)}</p>
+          <h2 className="mb-2 text-xl font-bold text-green-400">REFERRAL CODE</h2>
+          <h3 className="mb-4 text-2xl font-bold">Send to Friend!</h3>
+          <p className="mb-4 text-5xl font-bold">{user? (user["referral_code"]):(<p>Are you signed in?</p>)}</p>
           <button 
-            className="bg-green-400 text-white py-2 px-8 rounded-full mb-4"
+            className="px-8 py-2 mb-4 text-white bg-green-400 rounded-full"
             onClick={closeDialog}
           >
             Continue
