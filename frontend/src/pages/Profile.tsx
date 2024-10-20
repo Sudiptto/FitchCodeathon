@@ -20,7 +20,7 @@ const UserProfile = () => {
           <div className="flex items-center justify-center w-20 h-20 mb-2 bg-gray-200 rounded-full">
             <User size={40} className="text-blue-500" />
           </div>
-          <h2 className="text-xl font-bold">Aaron Liu</h2>
+          <h2 className="text-xl font-bold">Mahin Evan</h2>
           <p className="text-gray-600">9372 points</p>
           <p className="text-sm text-gray-500">155 Orders</p>
           <button className="px-4 py-1 mt-2 text-sm text-white bg-green-400 rounded-full">
@@ -32,7 +32,7 @@ const UserProfile = () => {
             <label className="block text-sm font-medium text-gray-700">Email</label>
             <input
               type="email"
-              value="aaronliu@gmail.com"
+              value="mahinevan@gmail.com"
               className="block w-full px-3 py-2 mt-1 border border-gray-300 rounded-md shadow-sm"
               readOnly
             />
