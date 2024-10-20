@@ -8,10 +8,20 @@ interface ColoredHeaderProps {
   photoUrl?: string;
 }
 
-const ColoredHeader: React.FC<ColoredHeaderProps> = ({ name, points, rank, photoUrl }) => {
+const ColoredHeader: React.FC<ColoredHeaderProps> = ({
+  name,
+  points,
+  rank,
+  photoUrl,
+}) => {
   return (
     <div className="relative bg-green-200 text-center p-6 rounded-b-3xl">
-      <img src="/Ecocycle.png" alt="Ecocycle Logo" className="w-20 mx-auto mb-2" />
+      <img
+        src="/Ecocycle.png"
+        alt="Ecocycle Logo"
+        style={{ width: "168px", height: "137px" }}
+        className="mx-auto mb-2"
+      />
 
       {/* Profile Picture and Rank Badge (conditionally rendered) */}
       {(photoUrl || rank !== undefined) && (
