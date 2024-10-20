@@ -5,6 +5,7 @@ import VendorLogin from './pages/VendorLogin';
 import SignUp from './pages/Signup';
 import Test from './pages/test';
 import VendorHomepage from './pages/VendorHomepage';
+import Leaderboard from './pages/Leaderboard';
 import VendorStatus from './pages/VendorStatus';
 
 // This is the User Login Page
@@ -92,6 +93,7 @@ const App: React.FC = () => {
     <Routes>
       <Route path="/" element={<LoginPage />} />
       <Route path="/homepage" element={<Homepage />} />
+      <Route path="/leaderboard" element={<Leaderboard />} />
       <Route path="/vendorlogin" element={<VendorLogin />} />
       <Route path="/signup" element={<SignUp />} />
       <Route path="test" element={<Test/>} />

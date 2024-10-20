@@ -1,6 +1,3 @@
-
-
-
 const Card = ({ title, description, image, link }: { title: string, description: string, image: string, link: string }) => {
     return (
       <div
