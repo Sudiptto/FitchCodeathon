@@ -120,7 +120,7 @@ response:
 def getQRCodeEco(email):
     responseUser = ""
     userData = getUserInfo(email)
-    responseUser = getQRCode(email) + f"http://127.0.0.1:5000/EcoCycle/assignPlate/{userData['email']}"
+    responseUser = getQRCode(email) + f"http://10.170.35.244:5500/EcoCycle/assignPlate/{userData['email']}"
 
     return jsonify({'message': responseUser})
 

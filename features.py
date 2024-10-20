@@ -36,25 +36,46 @@ def checkReferall(referralCode):
 #@param: String representing given username from field
 #@param: String representing given password from field
 #@param: referallCode
-def signUp(firstname, lastname, email, username, password, referallCode):
+def signUp(firstname, lastname, email, username, password, referallCode): 
+    print("User referral code:", referallCode)
+    print(type(referallCode))
 
+    # Check if the email or username already exists in the database
     if emailExists(email):
-        return "Email Exists"
+        return "Email exists"
     
     elif userExists(username):
-        return "Account exists"
+        return "Username exists"
     
-    # check if referal code is in database
-    elif checkReferall(referallCode) == False:
-        return "Referral code does exists"
-    
-    else:
-        print("Sign up successful!")
-        # Call to query to add to db with email, password, username
-        newUser = User(first_name =firstname, last_name = lastname, username=username, email=email, password=password, qr_link = generateQR(), number_of_strikes=0, number_of_orders=0, referral_count =0, referral_code = generateReferral(), points=0)
+    # Validate the referral code if it is provided
+    elif referallCode.strip() and referallCode != 'None':
+        # Check if the referral code is in the database
+        if not checkReferall(referallCode):
+            return "Referral code does not exist"
+  
+    # If all checks pass, proceed to add the new user to the database
+    try:
+        newUser = User(
+            first_name=firstname, 
+            last_name=lastname, 
+            username=username, 
+            email=email, 
+            password=password, 
+            qr_link=generateQR(), 
+            number_of_strikes=0, 
+            number_of_orders=0, 
+            referral_count=0, 
+            referral_code=generateReferral(), 
+            points=0
+        )
         db.session.add(newUser)
         db.session.commit()
-        return "Sign up successful"
+        return "User signed up!"
+    except Exception as e:
+        # Log the exception for debugging purposes
+        print("Error during user signup:", str(e))
+        return "An error occurred during signup"
+
 
 # if an account with username exists in database
 # @param: A string that represents username, to check if it exists 
