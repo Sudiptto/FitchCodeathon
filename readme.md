@@ -52,7 +52,7 @@ Step #5: By now this should be able to run
 
 NOTE WANT TO HOST ON PHONE/Want other devices on network to access?
 
-To host on phone do this, type ipconfig on terminal find the IPv4 Address, can look like this:  10.170.35.244, copy and paste your ipv4 address and do this at the bottom of main.py -> set host equal to whatever you just copied in ipv4
+To host on phone do this, type ipconfig on terminal (NOTE MAY BE DIFFERENT ON MAC) find the IPv4 Address, can look like this:  10.170.35.244, copy and paste your ipv4 address and do this at the bottom of main.py -> set host equal to whatever you just copied in ipv4
 
 if __name__ == '__main__':
     app.run(host=yourSelectedHost, port=5500, debug=True)
