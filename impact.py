@@ -70,6 +70,8 @@ C) Additional Quantifiable Benefits of Using Reusable Items:
    By emphasizing these, users can be better motivated to adopt sustainable practices.
 """
 def getWasteSaved(numberOfPlates):
+   if not numberOfPlates:
+      return 0
    # Constants for calculations
    avg_weight_container = 0.04  # in lbs (weight of a disposable plastic container)
    avg_weight_utensil = 0.008  # in lbs (weight of a disposable plastic utensil)
@@ -124,7 +126,8 @@ def getUserImpact(email):
     }), 200
 
 def getVendorImpact():
-    #vendor = Vendor.query().first()
+    vendors = Vendor.query.all()
+    vendor = vendors[0]
     numberOfPlates = db.session.query(func.sum(User.number_of_orders)).scalar()
     '''
     if not user:
@@ -135,15 +138,13 @@ def getVendorImpact():
     co2_savings = getCO2Savings(waste_saved)
     energy_savings = getEnergySavings(waste_saved)
     landfill_waste_saved = numberOfPlates
-    print(numberOfPlates)
-    print(round(waste_saved,3))
-    print(round(co2_savings,3))
-    print(round(energy_savings,2))
-    print(landfill_waste_saved)
+    #print(numberOfPlates)
+    #print(round(waste_saved,3))
+    #print(round(co2_savings,3))
+    #print(round(energy_savings,2))
+    #print(landfill_waste_saved)
     # Grab the number of orders the user had (represents the number of plates)
     #numberOfPlates = user.number_of_orders
-   
-    '''
     # Return the user's environmental impact
     return jsonify({
         'store_name' : vendor.store_name,
@@ -154,6 +155,3 @@ def getVendorImpact():
         'energy_savings_mj': round(energy_savings, 2),
         'landfill_waste_saved_plates': landfill_waste_saved
     }), 200
-    '''
-with app.app_context():
-   getVendorImpact()
