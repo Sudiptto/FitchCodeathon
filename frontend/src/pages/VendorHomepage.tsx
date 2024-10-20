@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import NavBarVendor from '@/components/NavBarVendor';
+import NavBarVendor from "@/components/NavBarVendor";
 import TypewriterText from "../components/TypewriterText";
 
 interface VendorImpactData {
@@ -11,7 +11,9 @@ interface VendorImpactData {
 }
 
 const VendorHomepage: React.FC = () => {
-  const [vendorImpact, setVendorImpact] = useState<VendorImpactData | null>(null);
+  const [vendorImpact, setVendorImpact] = useState<VendorImpactData | null>(
+    null
+  );
   const [isLoading, setIsLoading] = useState<boolean>(true);
   const [error, setError] = useState<string | null>(null);
 
@@ -50,7 +52,9 @@ const VendorHomepage: React.FC = () => {
         style={{ width: "168px", height: "137px" }}
         className="ww-48 mt-4 mb-6 mx-auto"
       />
-      <h2 className="mt-0 mb-1 text-center text-xl text-green-600">Your EcoCycle Vendor Impact </h2>
+      <h2 className="mt-0 mb-1 text-center text-xl text-green-600">
+        Your EcoCycle Vendor Impact{" "}
+      </h2>
 
       {isLoading ? (
         <p>Loading vendor impact...</p>
@@ -74,14 +78,16 @@ const VendorHomepage: React.FC = () => {
         <p>No data available</p>
       )}
 
-<h2 className="mt-1 mb-2 text-center text-xl text-green-600">Thank You!</h2>
-<div className="w-full px-4 mb-4">
-        <img
-          src="/graph.png"
-          alt="Graph"
-          className="w-full"
-        />
+      <h2 className="mt-1 mb-2 text-center text-xl text-green-600">
+        Thank You!
+      </h2>
+      <div className="w-full px-4 mb-4">
+        <img src="/vendorpie.png" alt="vendor pie chart" className="w-full" />
       </div>
+      <div className="w-full px-4 mb-4">
+        <img src="/vendorchart.png" alt="vendor chart" className="w-full" />
+      </div>
+
       <NavBarVendor />
     </div>
   );
