@@ -1,51 +1,61 @@
 import React from "react";
 import SquishedCard from "../components/squishedCard";
+import ColoredHeader from "../components/coloredHeader";
 import NavBar from "../components/NavBar";
 
 const Leaderboard: React.FC = () => {
   const data = [
     {
-      title: "Participant A",
-      subtitle: "Completed 10 tasks",
-      time: "1h 30m",
+      title: "Sudiptto Biswas",
+      subtitle: "900 Points",
+      time: "2",
     },
     {
-      title: "Participant B",
-      subtitle: "Completed 8 tasks",
-      time: "2h 15m",
+      title: "Samin Sarwar",
+      subtitle: "850 Points",
+      time: "3",
     },
     {
-      title: "Participant C",
-      subtitle: "Completed 6 tasks",
-      time: "1h 50m",
+      title: "Ashraful Mahin",
+      subtitle: "800 Points",
+      time: "4",
     },
     {
-      title: "Participant D",
-      subtitle: "Completed 4 tasks",
-      time: "1h 50m",
-    },
-    {
-      title: "Participant E",
-      subtitle: "Completed 3 tasks",
-      time: "1h 50m",
+      title: "Evan Haque",
+      subtitle: "750 Points",
+      time: "5",
     },
   ];
 
   return (
-    <div className="flex flex-col items-center w-full max-w-md mx-auto bg-white">
-      <img src="/Ecocycle.png" alt="Ecocycle Logo" className="w-48 mt-4 mb-6" />
-      <div className="flex flex-col w-full gap-y-4 px-4">
-        {data.map((item, index) => (
-          <SquishedCard
-            key={index}
-            title={item.title}
-            subtitle={item.subtitle}
-            time={item.time}
-          />
-        ))}
+    <>
+      {/* User Profile Section */}
+      <ColoredHeader
+        name="Aaron Liu"
+        points={1000}
+        rank={1}
+        photoUrl="./pfp.png"
+      />
+
+      {/* Leaderboard Content */}
+      <div className="flex flex-col items-center w-full max-w-md mx-auto bg-white">
+        <div className="flex flex-col w-full gap-y-4 px-4">
+          {data.map((item, index) => (
+            <SquishedCard
+              key={index}
+              title={item.title}
+              subtitle={item.subtitle}
+              time={item.time}
+            />
+          ))}
+        </div>
       </div>
-      <NavBar />
-    </div>
+
+      {/* Bottom Navbar */}
+      <div className="mt-auto">
+        <NavBar />
+      </div>
+    </>
   );
 };
 
