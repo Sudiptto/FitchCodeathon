@@ -77,3 +77,8 @@ def create_default_plates():
         print("Default plates created.")
     else:
         print("Default plates already exist. Skipping creation.")
+
+with app.app_context():
+    users = User.query.all()
+    for u in users:
+        modifyNumberOfOrders(u.email)

@@ -3,6 +3,7 @@ This section is for the amount of impact the user has had if they used our app, 
 """
 from models import *
 from flask import jsonify
+from sqlalchemy.sql import func  
 
 """
 Environmental Impact of Using Reusable Plates and Cutlery
@@ -68,7 +69,18 @@ C) Additional Quantifiable Benefits of Using Reusable Items:
    These calculations and metrics help make the environmental benefits of using reusable items more tangible.
    By emphasizing these, users can be better motivated to adopt sustainable practices.
 """
+def getWasteSaved(numberOfPlates):
+   # Constants for calculations
+   avg_weight_container = 0.04  # in lbs (weight of a disposable plastic container)
+   avg_weight_utensil = 0.008  # in lbs (weight of a disposable plastic utensil)
+   utensils_per_meal = 2  # average utensils used per meal (fork and spoon)
+   return (numberOfPlates * avg_weight_container) + (numberOfPlates * utensils_per_meal * avg_weight_utensil)
 
+def getCO2Savings(waste_saved):
+   return waste_saved * 0.453592 * 6  # in kg of CO₂
+
+def getEnergySavings(waste_saved):
+   return waste_saved * 0.453592 * 62  # in MJ
 
 def getUserImpact(email):
     user = User.query.filter_by(email=email).first()
@@ -78,6 +90,11 @@ def getUserImpact(email):
     # Grab the number of orders the user had (represents the number of plates)
     numberOfPlates = user.number_of_orders
 
+    waste_saved = getWasteSaved(numberOfPlates)
+    co2_savings = getCO2Savings(waste_saved)
+    energy_savings = getEnergySavings(waste_saved)
+    landfill_waste_saved = numberOfPlates
+    '''
     # Constants for calculations
     avg_weight_container = 0.04  # in lbs (weight of a disposable plastic container)
     avg_weight_utensil = 0.008  # in lbs (weight of a disposable plastic utensil)
@@ -96,7 +113,7 @@ def getUserImpact(email):
     # Reduction in landfill waste
     # The number of plates saved equals the number of meals with reusable plates
     landfill_waste_saved = numberOfPlates  # in terms of number of plates avoided
-
+   '''
     # Return the user's environmental impact
     return jsonify({
         'email': email,
@@ -105,3 +122,38 @@ def getUserImpact(email):
         'energy_savings_mj': round(energy_savings, 2),
         'landfill_waste_saved_plates': landfill_waste_saved
     }), 200
+
+def getVendorImpact():
+    #vendor = Vendor.query().first()
+    numberOfPlates = db.session.query(func.sum(User.number_of_orders)).scalar()
+    '''
+    if not user:
+        return jsonify({'Error': 'User not found'}), 404  # Return 404 if user does not exist
+    '''
+
+    waste_saved = getWasteSaved(numberOfPlates)
+    co2_savings = getCO2Savings(waste_saved)
+    energy_savings = getEnergySavings(waste_saved)
+    landfill_waste_saved = numberOfPlates
+    print(numberOfPlates)
+    print(round(waste_saved,3))
+    print(round(co2_savings,3))
+    print(round(energy_savings,2))
+    print(landfill_waste_saved)
+    # Grab the number of orders the user had (represents the number of plates)
+    #numberOfPlates = user.number_of_orders
+   
+    '''
+    # Return the user's environmental impact
+    return jsonify({
+        'store_name' : vendor.store_name,
+        'first_name': vendor.first_name,
+        'last_name': vendor.last_name,
+        'waste_saved_lbs': round(waste_saved, 3),
+        'co2_savings_kg': round(co2_savings, 3),
+        'energy_savings_mj': round(energy_savings, 2),
+        'landfill_waste_saved_plates': landfill_waste_saved
+    }), 200
+    '''
+with app.app_context():
+   getVendorImpact()

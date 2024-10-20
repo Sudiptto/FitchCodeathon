@@ -335,10 +335,15 @@ def getUserImpactEco(email):
 
     return userImpactData
 
+@app.route('/EcoCycle/getVendorImpact', methods=['GET'])
+def getVendorImpactEco():
+    vendorImpactData = getVendorImpact()
+
+    return vendorImpactData
 
 
 
 
 if __name__ == '__main__':
-    #app.run(host="10.170.35.244", port=5500, debug=True)
+    app.run(host="10.170.35.244", port=5500, debug=True)
     app.run(debug=True)
