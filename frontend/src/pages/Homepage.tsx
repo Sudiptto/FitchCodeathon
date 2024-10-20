@@ -51,10 +51,10 @@ const Homepage: React.FC = () => {
     const fetchUserImpact = async () => {
       try {
         /* When getEmail is implmenet we can change to responsev2, currently hard coded using response to get a user gmail */
-        const email = await fetch("http://10.170.35.244:5500/EcoCycle/");
-        const responseV2 = await fetch(
-          "http://10.170.35.244:5500/EcoCycle/getUserImpact?email=${encodeURIComponent(email)}"
-        );
+        //const email = await fetch("http://10.170.35.244:5500/EcoCycle/");
+        //const responseV2 = await fetch(
+        //  "http://10.170.35.244:5500/EcoCycle/getUserImpact?email=${encodeURIComponent(email)}"
+        //);
 
         const response = await fetch(
           "http://10.170.35.244:5500/EcoCycle/getUserImpact/mahinEvan@gmail.com"
@@ -89,7 +89,7 @@ const Homepage: React.FC = () => {
         className="mt-4 mb-2"
       />
 
-      <h2 className="mt-0 mb-2 text-center text-xl text-green-600">
+      <h2 className="mt-0 mb-2 text-xl text-center text-green-600">
         Your EcoCycle Impact
       </h2>
 
@@ -122,7 +122,7 @@ const Homepage: React.FC = () => {
         <img src="/usergraph.png" alt="user graph" className="w-full" />
       </div>
 
-      <div className="flex flex-col w-full gap-y-4 px-4">
+      <div className="flex flex-col w-full px-4 gap-y-4">
         {data.map((item, index) => (
           <Card
             key={index}
