@@ -14,6 +14,7 @@ const VendorHomepage: React.FC = () => {
       <img
         src="/Ecocycle.png"
         alt="Ecocycle Logo"
+        style={{ width: "168px", height: "137px" }}
         className="ww-48 mt-4 mb-6 mx-auto"
       />
       <div className="flex flex-col items-center w-full px-4 mb-4">

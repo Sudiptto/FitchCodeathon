@@ -9,7 +9,8 @@ const VendorProfile = () => {
         <img
         src="/Ecocycle.png"
         alt="Ecocycle Logo"
-        className="ww-48 mt-4 mb-6 mx-auto"
+        className="ww-48 mt-0 mb-6 mx-auto"
+        style={{ width: "168px", height: "137px" }}
         />
         <div className="w-20 h-20 bg-gray-200 rounded-full flex items-center justify-center mb-2">
           <User size={40} className="text-blue-500" />
