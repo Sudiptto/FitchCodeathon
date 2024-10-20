@@ -1,5 +1,6 @@
 import React from "react";
 
+/* points, rank, and photoURL is optional */
 interface ColoredHeaderProps {
   name: string;
   points?: number;
