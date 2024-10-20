@@ -50,8 +50,10 @@ def addVendor(first_name, last_name, email, password, store_name):
     db.session.commit()
 
 with app.app_context():
-    signUp("Sudiptto", "Biswas", "biswassudiptto@gmail.com", "Sbiswas", "123112", "964996")
-    signUp("Mahin", "Evan", "mahinEvan@gmail.com", "MahIN", "bds21", "964996")
+    #signUp("Sudiptto", "Biswas", "biswassudiptto@gmail.com", "Sbiswas", "123112", "964996")
+    #signUp("Mahin", "Evan", "mahinEvan@gmail.com", "MahIN", "bds21", "964996")
+    #signUp("Sam", "Evan", "sam@gmail.com", "samCrew", "bds21", "087206")
+    #signUp("Aaaron", "Miang", "aaronM@gmail.com", "AaronCrew", "123112", "087206")
     #addVendor("Fauzias", "Chicken", "fauziasStore@gmail.com", "123112", "Fauzias")
     #checkReferall("964996")
     create_default_plates()  # Create default plates only if none exist"""
