@@ -27,6 +27,7 @@ def create_default_plates():
                 meal=None,     # No meal assigned initially
                 time_out=0.0,   # Default timeout set to 0,
                 first_name=None,
+                meal_price=None,
                 last_name=None
             )
             db.session.add(plate)
@@ -56,6 +57,12 @@ with app.app_context():
     create_default_plates()  # Create default plates only if none exist"""
 
 # Route to sign up
+"""
+sample response:
+{
+  "message": "Sign up successful"
+}
+"""
 @app.route('/EcoCycle/signUp/<firstName>/<lastName>/<userName>/<email>/<password>/<referallCode>', methods=['GET'])
 def signUpEco(firstName, lastName, userName, email, password, referallCode):
     print(firstName, lastName, userName, email, password, referallCode)
@@ -67,6 +74,12 @@ def signUpEco(firstName, lastName, userName, email, password, referallCode):
     return jsonify({'message': responseUser})
 
 # Route to log in user side
+"""
+sample: response
+{
+  "message": "Login successful"
+}
+"""
 @app.route('/EcoCycle/logIn/<email>/<password>', methods=['GET'])
 def logInEco(email, password):
     responseUser = ""
@@ -74,15 +87,24 @@ def logInEco(email, password):
 
     return jsonify({'message': responseUser})
 
-# route to login vendor side
-@app.route('/EcoCycle/logInVendor/<username>/<password>', methods=['GET'])
-def logInVendorEco(username, password):
-    responseVendor = ""
-    responseVendor = checkVendorLogin(username, password)
 
-    return jsonify({'message': responseVendor})
+
 
 # Route to get user info by email (not for QR code)
+"""
+{
+  "email": "biswassudiptto@gmail.com",
+  "first_name": "Sudiptto",
+  "last_name": "Biswas",
+  "number_of_orders": 0,
+  "number_of_strikes": 0,
+  "points": 0,
+  "qrCode": "https://api.qrserver.com/v1/create-qr-code/?size=250x250&data=",
+  "referral_code": "994293",
+  "referral_count": 0,
+  "username": "Sbiswas"
+}
+"""
 @app.route('/EcoCycle/getUserInfo/<email>', methods=['GET'])
 def getUserInfoEco(email):
     print("ACTIVATED VIA QR CODE")
@@ -92,6 +114,14 @@ def getUserInfoEco(email):
     return jsonify(responseUser)
 
 # Route to get the QR code of the user based off email
+"""
+response:
+{
+  "message": "https://api.qrserver.com/v1/create-qr-code/?size=250x250&data=http://10.170.35.244:5500/EcoCycle/assignPlate/biswassudiptto@gmail.com"
+}
+^ link to QR code
+
+"""
 @app.route('/EcoCycle/getQRCode/<email>', methods=['GET'])
 def getQRCodeEco(email):
     responseUser = ""
@@ -100,7 +130,21 @@ def getQRCodeEco(email):
 
     return jsonify({'message': responseUser})
 
-# Route to assign a plate to User from qr code
+# Route to assign a plate to User from qr code, sample response: -> due to time less error bounds error bound later
+"""
+good response:
+{
+  "Meal": "Grilled Lamb and Steamed Cabbage",
+  "first_name": "Sudiptto",
+  "last_name": "Biswas",
+  "plate_number": "16",
+  "price": 20.0
+}
+bad response:
+{
+  "Error": "User not found"
+}
+"""
 @app.route('/EcoCycle/assignPlate/<email>', methods=['GET'])
 def assignPlateEco(email):
     responseUser = ""
@@ -110,12 +154,54 @@ def assignPlateEco(email):
 
     return responseUser
 
-# route to de-assign a plate from a user 
+# route to de-assign a plate from a user
+"""
+sample response:
+{
+  "Meal": null,
+  "Message": "Plate de-assigned successfully",
+  "first_name": null,
+  "last_name": null,
+  "plate_number": "25",
+  "price": 10.0
+}
+
+bad response:
+{
+  "Error": "Plate not found for this user"
+}
+""" 
 @app.route('/EcoCycle/deAssignPlate/<email>', methods=['GET'])
 def deAssignPlateEco(email):
     responseUser = deAssignPlate(email)
 
     return responseUser
+
+
+# NOTE: EVERYTHING DOWN HERE IS FOR THE VENDOR SIDE 
+
+# route to login vendor side
+# username = email
+"""
+{
+  "message": "Login successful"
+}
+"""
+@app.route('/EcoCycle/logInVendor/<username>/<password>', methods=['GET'])
+def logInVendorEco(username, password):
+    responseVendor = ""
+    responseVendor = checkVendorLogin(username, password)
+
+    return jsonify({'message': responseVendor})
+
+
+# route to get all the current orders from the plate class on vendor side
+@app.route('/EcoCycle/getCurrentOrders', methods=['GET'])
+def getCurrentOrders():
+    responseVendor = ""
+    responseVendor = getCurrentOrdersVendor()
+
+    return jsonify(responseVendor)
 
 if __name__ == '__main__':
     app.run(host="10.170.35.244", port=5500, debug=True)

@@ -135,12 +135,22 @@ def assignPlate(email):
     # Fetch the user based on the provided email
     user = User.query.filter_by(email=email).first()
 
+    # Check if the user exists
+    if not user:
+        return jsonify({'Error': 'User not found'}), 404
+    
     # Find the most recent unused plate
     plate = Plate.query.filter_by(is_used=False).order_by(Plate.id.desc()).first()
     
     # Randomly select a meal from the provided list
-    meals = ["Chicken", "Goat", "Fish"]
+    meals = ["Fauzia's Jerk Chicken Gyro", "Plate of Fauzia's Jerk Chicken", "Pot of Rice and Beans Cooking", "Curry Chicken", "Beef Patties", "Grilled Lamb and Steamed Cabbage"]
+    mealPrice = [10, 12, 8, 15, 5, 20]
+
+    # randomly select meals with it's corresponding mealprice
     random_meal = random.choice(meals)
+    meal_price = mealPrice[meals.index(random_meal)]
+
+
 
     # Update the plate information
     plate.is_used = True
@@ -148,6 +158,7 @@ def assignPlate(email):
     plate.first_name = user.first_name
     plate.last_name = user.last_name
     plate.meal = random_meal
+    plate.meal_price = meal_price
 
     # Commit the changes to the database
     db.session.commit()
@@ -155,8 +166,11 @@ def assignPlate(email):
     # Return a JSON response
     return jsonify({
         'plate_number': plate.plate_id,
+        "Meal": plate.meal,
         'first_name': plate.first_name,
-        'last_name': plate.last_name
+        'last_name': plate.last_name,
+        "price": plate.meal_price,
+
     })
 
 
@@ -188,9 +202,11 @@ def deAssignPlate(email):
 
     # Return a JSON response
     return jsonify({
+        "Meal": plate.meal,
         'plate_number': plate.plate_id,
         'first_name': plate.first_name,
         'last_name': plate.last_name,
+        "price": plate.meal_price,
         'Message': 'Plate de-assigned successfully'
     })
 

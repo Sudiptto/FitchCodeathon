@@ -52,6 +52,7 @@ class Plate(db.Model):
     qr_code = db.Column(db.String(255), nullable=True)
     is_used = db.Column(db.Boolean, default=False, nullable=False)
     user_id = db.Column(db.Integer, db.ForeignKey('users.id'), nullable=True)  # Allow null for user_id
+    meal_price = db.Column(db.Float, nullable=True)  # Allow null for meal price
     meal = db.Column(db.String(100), nullable=True)  # Allow null for meal
     time_out = db.Column(db.Float, nullable=True)
 
