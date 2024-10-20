@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { useNavigate, Link } from 'react-router-dom';
 
-const VendorLogin = () => {
+const VendorLogin = ({email}: {email: string}) => {
   const [vendorEmail, setVendorEmail] = useState('');
   const [password, setPassword] = useState('');
   const navigate = useNavigate();
@@ -13,10 +13,10 @@ const VendorLogin = () => {
   };
 
   return (
-    <div className="flex flex-col items-center justify-start bg-white px-8 py-12 font-comfortaa" style={{ width: '430px', height: '932px' }}>
+    <div className="flex flex-col items-center justify-start px-8 py-12 bg-white font-comfortaa" style={{ width: '430px', height: '932px' }}>
       <div className="w-full max-w-md">
         {/* Logo */}
-            <div className="flex justify-center items-center w-full mb-6">
+            <div className="flex items-center justify-center w-full mb-6">
             <img src="/Ecocycle.png" alt="Ecocycle logo" className="w-48 h-48" />
             </div>
         <h2 className="mb-8 text-4xl font-normal text-center">Welcome Back!</h2>
@@ -61,7 +61,7 @@ const VendorLogin = () => {
           <hr className="w-full border-gray-300" />
           <span className="absolute px-4 text-sm font-normal text-gray-500 bg-white">or</span>
         </div>
-        <div className="text-center space-y-2">
+        <div className="space-y-2 text-center">
           <p className="text-sm font-normal text-gray-600">
             Want to join EcoCycle? <a href="#" className="font-normal text-green-600">Contact Us</a>
           </p>

@@ -1,7 +1,7 @@
 import React from 'react';
 import NavBarVendor from '@/components/NavBarVendor';
 
-const VendorHomepage: React.FC = () => {
+const VendorHomepage = ({email}: {email: string}) => {
   const stats = [
     { label: "You're business saved 500 plates" },
     { label: "You're business saved $20" },
@@ -14,13 +14,13 @@ const VendorHomepage: React.FC = () => {
       <img
         src="/Ecocycle.png"
         alt="Ecocycle Logo"
-        className="ww-48 mt-4 mb-6 mx-auto"
+        className="mx-auto mt-4 mb-6 ww-48"
       />
       <div className="flex flex-col items-center w-full px-4 mb-4">
         {stats.map((stat, index) => (
-          <p key={index} className="text-center mb-4 font-comfortaa text-xl font-semibold">{stat.label}</p>
+          <p key={index} className="mb-4 text-xl font-semibold text-center font-comfortaa">{stat.label}</p>
         ))}
-        <p className="text-center font-bold mt-2">Thank you!</p>
+        <p className="mt-2 font-bold text-center">Thank you!</p>
       </div>
       <div className="w-full px-4 mb-4">
         <img

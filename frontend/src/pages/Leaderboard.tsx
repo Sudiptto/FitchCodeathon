@@ -11,7 +11,7 @@ interface LeaderboardData {
   username: string;
 }
 
-const Leaderboard: React.FC = () => {
+const Leaderboard = ({email}: {email: string}) => {
   const [data, setData] = useState<LeaderboardData[]>([]);
   const [isLoading, setIsLoading] = useState(true);
   const [error, setError] = useState<string | null>(null);
@@ -51,7 +51,7 @@ const Leaderboard: React.FC = () => {
 
       {/* Leaderboard Content */}
       <div className="flex flex-col items-center w-full max-w-md mx-auto bg-white">
-        <div className="flex flex-col w-full gap-y-4 px-4">
+        <div className="flex flex-col w-full px-4 gap-y-4">
           {data.slice(1).map((item, index) => (
             <SquishedCard
               key={index}

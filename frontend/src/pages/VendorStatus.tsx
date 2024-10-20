@@ -17,7 +17,7 @@ interface OrderItemProps extends Order {
 
 const OrderItem: React.FC<OrderItemProps> = ({ number, amount, time, onOpenPopup, ...rest }) => (
   <div 
-    className="flex justify-between items-center bg-white rounded-lg shadow-md p-4 mb-3 cursor-pointer hover:bg-gray-50"
+    className="flex items-center justify-between p-4 mb-3 bg-white rounded-lg shadow-md cursor-pointer hover:bg-gray-50"
     onClick={() => onOpenPopup({ number, amount, time, ...rest })}
   >
     <div>
@@ -32,10 +32,10 @@ const OrderPopup: React.FC<{ order: Order | null; onClose: () => void }> = ({ or
   if (!order) return null;
 
   return (
-    <div className="fixed inset-0 bg-black bg-opacity-50 flex justify-center items-center z-50">
-      <div className="bg-gray-100 p-6 rounded-lg max-w-sm w-full shadow-lg">
-        <h2 className="text-2xl font-bold mb-4">Order {order.number}</h2>
-        <div className="space-y-2 mb-6">
+    <div className="fixed inset-0 z-50 flex items-center justify-center bg-black bg-opacity-50">
+      <div className="w-full max-w-sm p-6 bg-gray-100 rounded-lg shadow-lg">
+        <h2 className="mb-4 text-2xl font-bold">Order {order.number}</h2>
+        <div className="mb-6 space-y-2">
           <p><span className="font-semibold">Takeout Time:</span> {order.time}</p>
           <p><span className="font-semibold">Plates Used:</span> {order.platesUsed || 'N/A'}</p>
           <p><span className="font-semibold">Knives used:</span> {order.knivesUsed || 'N/A'}</p>
@@ -44,7 +44,7 @@ const OrderPopup: React.FC<{ order: Order | null; onClose: () => void }> = ({ or
         </div>
         <div className="flex justify-end">
           <button 
-            className="bg-green-400 text-white px-6 py-2 rounded-md text-lg font-semibold hover:bg-green-500 transition-colors"
+            className="px-6 py-2 text-lg font-semibold text-white transition-colors bg-green-400 rounded-md hover:bg-green-500"
             onClick={onClose}
           >
             Done
@@ -55,7 +55,7 @@ const OrderPopup: React.FC<{ order: Order | null; onClose: () => void }> = ({ or
   );
 };
 
-const VendorStatus: React.FC = () => {
+const VendorStatus = ({email}: {email: string}) => {
   const [selectedOrder, setSelectedOrder] = useState<Order | null>(null);
 
   const orders: Order[] = [
@@ -71,7 +71,7 @@ const VendorStatus: React.FC = () => {
   return (
     <div className="flex flex-col min-h-screen bg-white">
       <div className="flex-grow p-4">
-        <div className="flex justify-center items-center w-full mb-6">
+        <div className="flex items-center justify-center w-full mb-6">
           <img src="/Ecocycle.png" alt="Ecocycle Logo" className="w-48" />
         </div>
         <div className="space-y-3">

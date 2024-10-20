@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { useNavigate, Link } from 'react-router-dom';
 
-const SignUp: React.FC = () => {
+const SignUp = () => {
   const [firstName, setFirstName] = useState('');
   const [lastName, setLastName] = useState('');
   const [username, setUsername] = useState('');
@@ -16,7 +16,7 @@ const SignUp: React.FC = () => {
   };
 
   return (
-    <div className="flex flex-col items-center justify-start bg-white px-8 py-12 font-comfortaa" style={{ width: '430px', height: '932px' }}>
+    <div className="flex flex-col items-center justify-start px-8 py-12 bg-white font-comfortaa" style={{ width: '430px', height: '932px' }}>
       <div className="w-full max-w-md">
         {/* Logo */}
         <div className="mb-8 text-center">
@@ -85,12 +85,12 @@ const SignUp: React.FC = () => {
           <hr className="w-full border-gray-300" />
           <span className="absolute px-4 text-sm font-normal text-gray-500 bg-white">or</span>
         </div>
-        <div className="flex justify-center space-x-4 mb-8">
+        <div className="flex justify-center mb-8 space-x-4">
           <img src="/facebook.png" alt="Facebook signup" className="w-12 h-12 rounded-md" />
           <img src="/google.png" alt="Google signup" className="w-12 h-12 rounded-md" />
           <img src="/apple.png" alt="Apple signup" className="w-12 h-12 rounded-md" />
         </div>
-        <div className="text-center space-y-2">
+        <div className="space-y-2 text-center">
           <p className="text-sm font-normal text-gray-600">
             Have an account? <Link to="/" className="font-normal text-green-600">Log In</Link>
           </p>

@@ -9,7 +9,7 @@ interface CardData {
   link: string;
 }
 
-const Homepage: React.FC = () => {
+const Homepage = ({email}: {email: string}) => {
   const data: CardData[] = [
     {
       title: 'OTHER OF PEARL',
@@ -38,7 +38,7 @@ const Homepage: React.FC = () => {
         alt="Ecocycle Logo" 
         className="w-48 mt-4 mb-6"
       />
-      <div className='flex flex-col w-full gap-y-4 px-4'>
+      <div className='flex flex-col w-full px-4 gap-y-4'>
         {data.map((item, index) => (
           <Card 
             key={index} 

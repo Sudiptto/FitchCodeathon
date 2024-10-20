@@ -2,7 +2,7 @@ import RewardCard from "../components/rewardCard";
 import ColoredHeader from "../components/coloredHeader"; 
 import NavBar from "../components/NavBar";
 
-const Rewards: React.FC = () => {
+const Rewards = ({email}: {email: string}) => {
     const data = [
         {
           title: "Transit OMNY Credit",
