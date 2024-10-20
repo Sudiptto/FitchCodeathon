@@ -23,7 +23,7 @@ with app.app_context():
     #signUp("Mahin", "Evan", "mahinEvan@gmail.com", "MahIN", "bds21", "964996")
     #signUp("Sam", "Evan", "sam@gmail.com", "samCrew", "bds21", "087206")
     #signUp("Aaaron", "Miang", "aaronM@gmail.com", "AaronCrew", "123112", "087206")
-    #addVendor("Fauzias", "Chicken", "fauziasStore@gmail.com", "123112", "Fauzias")
+    addVendor("Fauzias", "Chicken", "fauziasStore@gmail.com", "123112", "Fauzias")
     #checkReferall("964996")
     #fillSignUpData()
 
@@ -346,4 +346,4 @@ def getVendorImpactEco():
 
 if __name__ == '__main__':
     app.run(host="10.170.35.244", port=5500, debug=True)
-    app.run(debug=True)
+    #app.run(debug=True)

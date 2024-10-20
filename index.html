@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>How to Run the Server</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 20px;
+        }
+        h1 {
+            color: #333;
+        }
+        h2 {
+            color: #555;
+        }
+        pre {
+            background-color: #f4f4f4;
+            padding: 10px;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+        }
+        code {
+            color: #c7254e;
+            background-color: #f9f2f4;
+            padding: 2px 4px;
+            border-radius: 4px;
+        }
+    </style>
+</head>
+<body>
+    <h1>How to Run the Server</h1>
+
+    <h2>Step 1: Install Requirements</h2>
+    <p>Run the following command to install the required packages:</p>
+    <pre><code>pip install -r requirements.txt</code></pre>
+    <p>For macOS users, use:</p>
+    <pre><code>pip3 install -r requirements.txt</code></pre>
+
+    <h2>Step 2: Modify <code>main.py</code></h2>
+    <p>Open <code>main.py</code> and find the following code at the bottom:</p>
+    <pre><code>if __name__ == '__main__':
+    app.run(host="10.170.35.244", port=5500, debug=True)
+    #app.run(debug=True)</code></pre>
+    <p>Change it to:</p>
+    <pre><code>if __name__ == '__main__':
+    #app.run(host="10.170.35.244", port=5500, debug=True)
+    app.run(debug=True)</code></pre>
+    <p>This will run the server on your local machine at <code>http://127.0.0.1:5000</code>.</p>
+
+    <h2>Step 3: Modify QR Code Route</h2>
+    <p>In <code>main.py</code>, find the following route:</p>
+    <pre><code>@app.route('/EcoCycle/getQRCode/&lt;email&gt;', methods=['GET'])
+def getQRCodeEco(email):
+    responseUser = ""
+    userData = getUserInfo(email)
+    responseUser = getQRCode(email) + f"http://10.170.35.244:5500/EcoCycle/assignPlate/{userData['email']}"
+
+    return jsonify({'message': responseUser})</code></pre>
+    <p>Change the line:</p>
+    <pre><code>responseUser = getQRCode(email) + f"http://10.170.35.244:5500/EcoCycle/assignPlate/{userData['email']}"</code></pre>
+    <p>To:</p>
+    <pre><code>responseUser = getQRCode(email) + f"http://127.0.0.1:5000/EcoCycle/assignPlate/{userData['email']}"</code></pre>
+
+    <h2>Step 4: Initialize Database</h2>
+    <p>In <code>main.py</code>, find the following code at the top:</p>
+    <pre><code>with app.app_context():
+    #signUp("Sudiptto", "Biswas", "biswassudiptto@gmail.com", "Sbiswas", "123112", "964996")
+    #signUp("Mahin", "Evan", "mahinEvan@gmail.com", "MahIN", "bds21", "964996")
+    #signUp("Sam", "Evan", "sam@gmail.com", "samCrew", "bds21", "087206")
+    #signUp("Aaaron", "Miang", "aaronM@gmail.com", "AaronCrew", "123112", "087206")
+    #addVendor("Fauzias", "Chicken", "fauziasStore@gmail.com", "123112", "Fauzias")
+    #checkReferall("964996")
+    #fillSignUpData()
+
+    emails = [
+    "biswassudiptto@gmail.com",
+    "mahinEvan@gmail.com",
+    "sam@gmail.com",
+    "aaronM@gmail.com",
+    "jess.williams@gmail.com",
+    "daniel.smith01@gmail.com",
+    "emily.jones@outlook.com",
+    "michael.brown@gmail.com",
+    "sophia.garcia@yahoo.com"
+    ]
+    # modify referall code count
+    #modifyReferallCodeCount("biswassudiptto@gmail.com")
+    #modifyReferallCodeCount("emily.jones@outlook.com")
+    #modifyReferallCodeCount("sophia.garcia@yahoo.com")
+    #modifyReferallCodeCount("mahinEvan@gmail.com")
+    #modifyReferallCodeCount("daniel.smith01@gmail.com")
+
+    # modify orders (mocking)
+    """for email in emails:
+        modifyNumberOfOrders(email)                          
+    """
+    #modifyNumberOfOrders("mahinEvan@gmail.com")  
+    create_default_plates()  # Create default plates only if none exist</code></pre>
+    <p>Ensure that the necessary initializations are uncommented if needed.</p>
+
+    <h2>Step 5: Run the Server</h2>
+    <p>Run the server using the following command:</p>
+    <pre><code>python main.py</code></pre>
+    <p>For macOS users, use:</p>
+    <pre><code>python3 main.py</code></pre>
+
+    <h2>Optional: Host on Phone or Other Devices</h2>
+    <p>To host on a phone or other devices on the network, find your IPv4 address by running <code>ipconfig</code> in the terminal (may vary on macOS). Copy the IPv4 address and modify <code>main.py</code> as follows:</p>
+    <pre><code>if __name__ == '__main__':
+    app.run(host="yourSelectedHost", port=5500, debug=True)
+    #app.run(debug=True)</code></pre>
+    <p>Replace <code>yourSelectedHost</code> with your IPv4 address.</p>
+
+    <h2>USE</h2>
+    <p>Now refer back to the front-end docs to see how to run the front-end!</p>
+    <p>Check the routes here to see what they do : <a href="docs.html">API Documentation</a> </p>
+
+</body>
+</html>

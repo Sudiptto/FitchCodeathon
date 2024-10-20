@@ -18,6 +18,9 @@ def fillSignUpData():
     
 # function to add a vendor
 def addVendor(first_name, last_name, email, password, store_name):
+    # check if email is in the vendor class 
+    if Vendor.query.filter_by(email=email).first():
+        return "Vendor already exists"
     vendor = Vendor(
         first_name=first_name,
         last_name=last_name,
@@ -44,7 +47,7 @@ def modifyReferallCodeCount(email):
 
 # function to modify number of orders (mock data)
 def modifyNumberOfOrders(email):
-    # generate random integer from 1 - 10 (number of orders)
+    # generate random integer from 55 - 105 (exclusive) (number of orders)
     number_of_orders = random.randint(55, 105)
 
     user = User.query.filter_by(email=email).first()
