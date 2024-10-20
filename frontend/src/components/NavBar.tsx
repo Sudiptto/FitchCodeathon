@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
-import icons from './icons';
+import icons from "./icons";
 import TooltipButton from "./TooltipButton";
 import Referral from "./referral";
 
@@ -27,12 +27,12 @@ function NavBar(): JSX.Element {
 
   const fetchQRCode = async (): Promise<void> => {
     try {
-      const userEmail = 'biswassudiptto@gmail.com';
+      const userEmail = "biswassudiptto@gmail.com";
       const apiUrl = `http://10.170.35.244:5500/EcoCycle/getQRCode/${userEmail}`;
-      
+
       const response = await fetch(apiUrl);
       const data: QRCodeResponse = await response.json();
-      
+
       // The QR code URL is directly in the 'message' field
       setQrCodeUrl(data.message);
       setShowQRCode(true);
@@ -44,7 +44,6 @@ function NavBar(): JSX.Element {
   return (
     <div className="fixed bottom-0 z-50 w-full bg-white border-t border-gray-200 dark:bg-gray-700 dark:border-gray-600">
       <div className="relative max-w-lg mx-auto">
-        
         {/* Main Nav-Bar Items */}
         <div className="flex items-center">
           <TooltipButton
@@ -85,11 +84,10 @@ function NavBar(): JSX.Element {
         {/* Dropdown menu for Categories */}
         {isCategoriesOpen && (
           <div
-            className="absolute bottom-[100%] right-[60px] mb-2 bg-white shadow-lg rounded-lg p-2"
-            style={{ minWidth: "120px" }}
+            className="absolute bottom-[100%] right-[60px] mb-0 bg-none shadow-none rounded-lg p-0"
           >
-            <ul className="ftext-gray-800">
-              <li className="flex items-center justify-center w-full p-2">
+            <ul className="bg-gray-100 rounded-full p-6 space-y-4">
+              <li className="flex flex-col items-center justify-center w-full">
                 <TooltipButton
                   tooltipId="tooltip-rewards"
                   tooltipText="Rewards"
@@ -99,7 +97,8 @@ function NavBar(): JSX.Element {
                   svgSrc={icons.rewardsIcon}
                 />
               </li>
-              <li className="flex items-center justify-center w-full p-2">
+
+              <li className="flex flex-col items-center justify-center w-full">
                 <TooltipButton
                   tooltipId="tooltip-leaderboard"
                   tooltipText="Leaderboard"
@@ -111,8 +110,9 @@ function NavBar(): JSX.Element {
                   svgSrc={icons.leaderboardIcon}
                 />
               </li>
-              <li className="flex items-center justify-center w-full p-2">
-                <Referral/>
+
+              <li className="flex flex-col items-center justify-center w-full">
+                <Referral />
               </li>
             </ul>
           </div>
@@ -137,7 +137,11 @@ function NavBar(): JSX.Element {
                 SCAN THIS QR CODE AT THE CASHIER TO GET YOUR PLATE!
               </p>
               <div className="border-2 border-black p-1 mb-2">
-                <img src={qrCodeUrl} alt="QR Code" className="w-full h-auto max-w-[200px] mx-auto" />
+                <img
+                  src={qrCodeUrl}
+                  alt="QR Code"
+                  className="w-full h-auto max-w-[200px] mx-auto"
+                />
               </div>
               <button
                 onClick={() => setShowQRCode(false)}
