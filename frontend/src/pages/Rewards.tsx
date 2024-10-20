@@ -30,7 +30,7 @@ const Rewards: React.FC = () => {
         },
         {
           title: "Ferry Ticket",
-          subtitle: "$5 Credit",
+          subtitle: "$5 Credit (Oct - May)",
           points: "500 Points",
           imageUrl: "./nyc-ferry.svg",
         },
@@ -46,7 +46,7 @@ const Rewards: React.FC = () => {
 
       {/* Rewards Content */}
       <div className="flex flex-col items-center w-full max-w-md mx-auto bg-white">
-        <div className="flex flex-col w-full gap-y-4 px-4 overflow-scroll h-7/8">
+        <div className="flex flex-col w-full px-4 overflow-scroll gap-y-4 h-7/8">
           {data.map((item, index) => (
             <RewardCard
               key={index}
