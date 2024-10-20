@@ -1,8 +1,21 @@
 import RewardCard from "../components/rewardCard";
 import ColoredHeader from "../components/coloredHeader"; 
 import NavBar from "../components/NavBar";
+import React, { useState, useEffect } from 'react';
 
 const Rewards: React.FC = () => {
+  const [user, setUser] = useState();
+
+  // Mock data for rewards
+  useEffect(() => {
+      const fetchReferralCode = async () => {
+      //get api call
+      const response = await fetch(`${import.meta.env.VITE_API_URL}/EcoCycle/getUserInfo/mahinEvan@gmail.com`)
+      const data = await response.json()
+      setUser(data)
+      };
+      fetchReferralCode();
+  }, []);
     const data = [
         {
           title: "Transit OMNY Credit",
@@ -41,7 +54,7 @@ const Rewards: React.FC = () => {
       {/* User Profile Section */}
       <ColoredHeader
         name="Rewards"
-        points={9872}
+        points={user? (user["points"]): 0}
       />
 
       {/* Rewards Content */}
