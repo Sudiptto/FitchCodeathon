@@ -1,24 +1,22 @@
-import { useState } from "react";
-import { useNavigate } from "react-router-dom"; // Import useNavigate for programmatic navigation
-import icons from './icons';  // Import the icons module
-import TooltipButton from "./TooltipButton"; // Import the TooltipButton
+import React, { useState } from "react";
+import { useNavigate } from "react-router-dom";
+import icons from './icons';
+import TooltipButton from "./TooltipButton";
 
 function NavBarVendor() {
   const [activeButton, setActiveButton] = useState("");
-  const navigate = useNavigate(); // Initialize the useNavigate hook
+  const navigate = useNavigate();
 
-  /* Sets button to be green and redirects user */
   const handleButtonClick = (buttonName: string, linkHref: string) => {
     setActiveButton(buttonName);
-    navigate(linkHref); // Use navigate to perform client-side navigation
+    navigate(linkHref);
   };
 
   return (
     <div className="fixed bottom-0 z-50 w-full bg-white border-t border-gray-200 dark:bg-gray-700 dark:border-gray-600">
       <div className="relative max-w-lg mx-auto">
-        
         {/* Main Nav-Bar Items */}
-        <div className="flex items-center">
+        <div className="flex items-center justify-between">
           <TooltipButton
             tooltipId="tooltip-home"
             tooltipText="Home"
@@ -32,7 +30,7 @@ function NavBarVendor() {
             tooltipText="Status"
             srText="Status"
             isActive={activeButton === "status"}
-            onClick={() => handleButtonClick("status", "/Status")}
+            onClick={() => handleButtonClick("status", "/vendorstatus")}
             svgSrc={icons.statusIcon}
           />
           <div className="w-16"></div>
@@ -53,8 +51,7 @@ function NavBarVendor() {
             svgSrc={icons.profileIcon}
           />
         </div>
-        )
-
+        
         {/* Middle Center Button */}
         <div className="absolute inset-x-0 flex justify-center -top-6">
           <button

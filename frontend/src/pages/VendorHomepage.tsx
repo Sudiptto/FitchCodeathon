@@ -1,5 +1,5 @@
 import React from 'react';
-import NavBar from "../components/NavBar";
+import NavBarVendor from '@/components/NavBarVendor';
 
 const VendorHomepage: React.FC = () => {
   const stats = [
@@ -29,7 +29,7 @@ const VendorHomepage: React.FC = () => {
           className="w-full"
         />
       </div>
-      <NavBar />
+      <NavBarVendor />
     </div>
   );
 };
