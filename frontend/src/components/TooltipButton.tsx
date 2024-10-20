@@ -1,16 +1,16 @@
 /* Helper file to create a reusable TooltipButton component in React.
     This component displays a button with an associated tooltip, 
     Customizable with different icons, text, and an active state. */  
-import React from "react";
 
-interface TooltipButtonProps {
-  tooltipId: string;
-  tooltipText: string;
-  svgSrc: string;
-  srText: string;
-  isActive: boolean;
-  onClick: (event: React.MouseEvent<HTMLButtonElement>) => void;
-}
+
+//interface TooltipButtonProps {
+//  tooltipId: string;
+//  tooltipText: string;
+//  svgSrc: string;
+//  srText: string;
+//  isActive: boolean;
+//  onClick: (event: React.MouseEvent<HTMLButtonElement>) => void;
+//}
 
 const TooltipButton = ({
   tooltipId,
