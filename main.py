@@ -48,7 +48,7 @@ with app.app_context():
     # modify orders (mocking)
     for email in emails:
         modifyNumberOfOrders(email)     """                     
-    
+    modifyNumberOfOrders("mahinEvan@gmail.com")
     #modifyNumberOfOrders("mahinEvan@gmail.com")  
     create_default_plates()  # Create default plates only if none exist"""
 
@@ -101,7 +101,7 @@ def logInEco(email, password):
 """
 @app.route('/EcoCycle/getUserInfo/<email>', methods=['GET'])
 def getUserInfoEco(email):
-    print("ACTIVATED VIA QR CODE")
+    #print("ACTIVATED VIA QR CODE")
     responseUser = ""
     responseUser = getUserInfo(email)
 

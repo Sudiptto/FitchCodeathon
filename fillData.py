@@ -49,10 +49,11 @@ def modifyReferallCodeCount(email):
 # function to modify number of orders (mock data)
 def modifyNumberOfOrders(email):
     # generate random integer from 55 - 105 (exclusive) (number of orders)
-    number_of_orders = random.randint(55, 105)
+    number_of_orders = random.randint(500, 1000)
 
     user = User.query.filter_by(email=email).first()
     user.number_of_orders += number_of_orders
+    #user.points += (number_of_orders * 500)
 
     # modify points
     #user.points += (number_of_orders * 500)
