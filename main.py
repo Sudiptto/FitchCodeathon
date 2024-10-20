@@ -196,6 +196,66 @@ def logInVendorEco(username, password):
 
     return jsonify({'message': responseVendor})
 
+# for leaderboard rank top to bottom
+"""
+sample response:
+[
+  {
+    "firstName": "Sudiptto",
+    "lastName": "Biswas",
+    "points": 900,
+    "rank": 1,
+    "username": "Sbiswas"
+  },
+  {
+    "firstName": "Mahin",
+    "lastName": "Evan",
+    "points": 500,
+    "rank": 2,
+    "username": "MahIN"
+  },
+  {
+    "firstName": "Sam",
+    "lastName": "Evan",
+    "points": 0,
+    "rank": 3,
+    "username": "samCrew"
+  },
+  {
+    "firstName": "Samin",
+    "lastName": "Sarwar",
+    "points": 0,
+    "rank": 4,
+    "username": "samin!"
+  },
+  {
+    "firstName": "Aaaron",
+    "lastName": "Miang",
+    "points": 0,
+    "rank": 5,
+    "username": "AaronCrew"
+  }
+]
+"""
+def fetchLeaderboard():
+    # Query all users and order them by points in descending order
+    users = User.query.order_by(User.points.desc()).all()
+
+    # Create a list to store the formatted leaderboard
+    leaderboard = []
+
+    # Iterate over each user and format the response
+    for i, user in enumerate(users, start=1):
+        user_data = {
+            "rank": i,
+            "firstName": user.first_name,
+            "lastName": user.last_name,
+            "username": user.username,
+            "points": user.points
+        }
+        leaderboard.append(user_data)
+
+    return leaderboard        
 
 # route to get the leaderboard of the top users based off points
 @app.route('/EcoCycle/getLeaderboard', methods=['GET'])
