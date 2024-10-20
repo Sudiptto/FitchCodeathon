@@ -1,5 +1,7 @@
 from models import *
 from flask import jsonify
+from datetime import datetime
+from pytz import timezone, utc
 
 #Check if a login attempt is succesful
 #@param: String representing given email from field
@@ -196,6 +198,8 @@ def deAssignPlate(email):
     plate.first_name = None
     plate.last_name = None
     plate.meal = None
+    plate.meal_price = None
+
 
     # Commit the changes to the database
     db.session.commit()
@@ -210,4 +214,97 @@ def deAssignPlate(email):
         'Message': 'Plate de-assigned successfully'
     })
 
+# get an object of objects of all current orders
+# sample response:
+"""
+    {
+        {
+            order: "Order 25',
+            time: "2024-10-20 00:40:01.773988"
+            price: 12
+        },
+        {
+            order: "Order 25',
+            time: "2024-10-20 00:40:01.773988"
+            price: 12
+        }
+        ....
+    }
+
+"""
+"""
+sample response:
+[
+  {
+    "firstName": "Sudiptto",
+    "lastName": "Biswas",
+    "meal": "Fauzia's Jerk Chicken Gyro",
+    "order": "Order 22",
+    "price": 10.0,
+    "time": "2024-10-19 20:40:01.773988"
+  },
+  {
+    "firstName": "Sudiptto",
+    "lastName": "Biswas",
+    "meal": "Pot of Rice and Beans Cooking",
+    "order": "Order 23",
+    "price": 8.0,
+    "time": "2024-10-19 20:40:01.773988"
+  },
+  {
+    "firstName": "Sudiptto",
+    "lastName": "Biswas",
+    "meal": "Curry Chicken",
+    "order": "Order 24",
+    "price": 15.0,
+    "time": "2024-10-19 20:40:01.773988"
+  },
+  {
+    "firstName": "Sudiptto",
+    "lastName": "Biswas",
+    "meal": "Pot of Rice and Beans Cooking",
+    "order": "Order 25",
+    "price": 8.0,
+    "time": "2024-10-19 20:40:01.773988"
+  }
+]
+
+or
+
+[]
+
+"""
+def fetchCurrentOrders():
+    # Define the EST timezone
+    est = timezone('US/Eastern')
+
+    # Query all plates that are currently in use (active orders)
+    active_plates = Plate.query.filter_by(is_used=True).all()
+
+    # Create a list to store the formatted orders
+    orders = []
+
+    # Iterate over each active plate and format the response
+    for plate in active_plates:
+        # If the timestamp is naive (has no timezone info), assign it UTC before converting
+        if plate.timestamp.tzinfo is None:
+            timestamp_utc = utc.localize(plate.timestamp)
+        else:
+            timestamp_utc = plate.timestamp
+
+        # Convert the timestamp to EST
+        timestamp_est = timestamp_utc.astimezone(est)
+        time_est_str = timestamp_est.strftime("%Y-%m-%d %H:%M:%S.%f")
+
+        order = {
+            "order": f"Order {plate.id}",
+            "time": time_est_str,  # Use the EST-formatted timestamp
+            "firstName": plate.first_name or "",
+            "lastName": plate.last_name or "",
+            "meal": plate.meal or "",
+            "price": plate.meal_price or 0.0
+        }
+        orders.append(order)
+    print("These are the orders: ", orders)
+    return orders
     

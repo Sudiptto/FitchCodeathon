@@ -199,9 +199,11 @@ def logInVendorEco(username, password):
 @app.route('/EcoCycle/getCurrentOrders', methods=['GET'])
 def getCurrentOrders():
     responseVendor = ""
-    responseVendor = getCurrentOrdersVendor()
+    responseVendor = fetchCurrentOrders()
+    
+    
+    return responseVendor
 
-    return jsonify(responseVendor)
 
 if __name__ == '__main__':
     app.run(host="10.170.35.244", port=5500, debug=True)

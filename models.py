@@ -1,4 +1,5 @@
 from flask_sqlalchemy import SQLAlchemy
+from datetime import datetime, timezone
 from app import app
 import random
 
@@ -55,6 +56,13 @@ class Plate(db.Model):
     meal_price = db.Column(db.Float, nullable=True)  # Allow null for meal price
     meal = db.Column(db.String(100), nullable=True)  # Allow null for meal
     time_out = db.Column(db.Float, nullable=True)
+
+    # New timestamp field to store the date and time with timezone info
+    timestamp = db.Column(db.DateTime, nullable=True, default=lambda: datetime.now(timezone.utc))
+
+    def set_current_time(self):
+        """Sets the timestamp field to the current time in UTC with timezone info."""
+        self.timestamp = datetime.now(timezone.est)
 
     # New fields for first and last names
     first_name = db.Column(db.String(50), nullable=True, default=None)  # Allow null for first name
