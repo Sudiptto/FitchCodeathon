@@ -1,51 +1,63 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
 import SquishedCard from "../components/squishedCard";
 import ColoredHeader from "../components/coloredHeader";
 import NavBar from "../components/NavBar";
 
+interface LeaderboardData {
+  firstName: string;
+  lastName: string;
+  points: number;
+  rank: number;
+  username: string;
+}
+
 const Leaderboard: React.FC = () => {
-  const data = [
-    {
-      title: "Sudiptto Biswas",
-      subtitle: "900 Points",
-      time: "2",
-    },
-    {
-      title: "Samin Sarwar",
-      subtitle: "850 Points",
-      time: "3",
-    },
-    {
-      title: "Ashraful Mahin",
-      subtitle: "800 Points",
-      time: "4",
-    },
-    {
-      title: "Evan Haque",
-      subtitle: "750 Points",
-      time: "5",
-    },
-  ];
+  const [data, setData] = useState<LeaderboardData[]>([]);
+  const [isLoading, setIsLoading] = useState(true);
+  const [error, setError] = useState<string | null>(null);
+
+  useEffect(() => {
+    const fetchLeaderboard = async () => {
+      try {
+        const response = await fetch('http://10.170.35.244:5500/EcoCycle/getLeaderboard');
+        if (!response.ok) {
+          throw new Error('There was an error dude!');
+        }
+        const result = await response.json();
+        setData(result);
+        setIsLoading(false);
+      } catch (error) {
+        setError('Failed to fetch leaderboard data');
+        setIsLoading(false);
+      }
+    };
+
+    fetchLeaderboard();
+  }, []);
+
+  if (isLoading) return <div>Loading...</div>;
+  if (error) return <div>Error: {error}</div>;
+  if (data.length === 0) return <div>No data available</div>;
 
   return (
     <>
       {/* User Profile Section */}
       <ColoredHeader
-        name="Aaron Liu"
-        points={1000}
-        rank={1}
+        name={`${data[0].firstName} ${data[0].lastName}`}
+        points={data[0].points}
+        rank={data[0].rank}
         photoUrl="./pfp.png"
       />
 
       {/* Leaderboard Content */}
       <div className="flex flex-col items-center w-full max-w-md mx-auto bg-white">
         <div className="flex flex-col w-full gap-y-4 px-4">
-          {data.map((item, index) => (
+          {data.slice(1).map((item, index) => (
             <SquishedCard
               key={index}
-              title={item.title}
-              subtitle={item.subtitle}
-              time={item.time}
+              title={`${item.firstName} ${item.lastName}`}
+              subtitle={`${item.points} Points`}
+              time={`${item.rank}`}
             />
           ))}
         </div>
