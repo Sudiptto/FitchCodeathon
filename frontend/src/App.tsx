@@ -6,6 +6,7 @@ import SignUp from './pages/Signup';
 import Test from './pages/test';
 import VendorHomepage from './pages/VendorHomepage';
 import Leaderboard from './pages/Leaderboard';
+import Status from './pages/Status';
 import Rewards from './pages/Rewards';
 import VendorStatus from './pages/VendorStatus';
 import UserProfile from './pages/Profile';
@@ -98,6 +99,7 @@ const App: React.FC = () => {
       <Route path="/leaderboard" element={<Leaderboard />} />
       <Route path="/vendorlogin" element={<VendorLogin />} />
       <Route path="/rewards" element={<Rewards />} />
+      <Route path="/status" element={<Status />} />
       <Route path="/signup" element={<SignUp />} />
       <Route path="test" element={<Test/>} />
       <Route path="/vendorhomepage" element={<VendorHomepage />} />
